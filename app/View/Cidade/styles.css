@@ -1,0 +1,23 @@
+.city-container{
+	width: 100%;
+	max-width: 1180px;
+	padding: 0 30px;
+	margin: 64px auto;
+}
+.city-container .img-container{
+	transition: filter 200ms;
+	border-width: 0;
+}
+.city-container .img-container a img{
+	border-radius: 8px;
+	width: 100%;
+	height: 100%;
+}	
+
+.city-container .img-container:hover{
+	filter: brightness(50%);
+}
+
+.carrousel-container img{
+	height: 25%;
+}

@@ -1,0 +1,16 @@
+.home-container{
+    width: 100%;
+    max-width: 1180px;	
+    padding: 0 30px;
+    margin: 64px auto;
+}
+.home-container .img-container{
+    transition: filter 200ms;
+}
+.home-container .img-container:hover{
+    filter: brightness(50%);
+}
+
+.carrousel-container img{
+	height: 25%;
+}

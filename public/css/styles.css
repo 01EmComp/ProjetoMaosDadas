@@ -1,0 +1,132 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+}
+@media (max-width: 700px) {
+	.bodyLogin{
+		width: auto;
+		background-image: url(./background2.jpg);
+		background-repeat: no-repeat; 
+		background-size: cover;
+	}
+}
+#captcha{
+	align-self: center;
+	display: block;
+	margin: auto;
+	width: auto;
+}
+.login{
+	background-color: #000000ba;
+	width: 380px;
+	height: 400px;
+	margin: auto;
+	border-radius: 10px;
+	margin-top: 10%;
+	text-align: center;
+}
+.login:hover{
+	transition-duration: 300ms;
+	background-color: #000000dd;
+}
+
+.login .loginContainer{
+	width: auto;
+	height: auto;
+}
+
+
+.login input{
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	width: auto;
+	border: 1px solid #ced4da;
+	height: 34px;
+	border-width: 2px;
+	border-radius: 4px;	
+	font-size: 24px;
+}
+
+.login input:focus{
+	border-color: #0074e0;	
+	border-radius: 6px;	
+	outline: 0;
+	box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
+}
+
+.login button{
+	margin: auto;
+	display: block;
+	width: 100px;
+	height:50px;
+	border:solid 1px #d8393a;
+	border-radius: 4px;
+	color: #d8393a;
+	font-size: 24px;
+	background-color:#00000050;
+	cursor:pointer;
+
+}
+.login button:hover{
+	transition-duration: 300ms;
+	background-color: #d8393a;
+	color: #000;
+}
+.login a{
+	text-decoration: none;
+	font-size: 20px;
+	color: #d8393a;
+	font-family: arial;
+}
+.login a:hover{
+	color: #c7494a;
+}
+
+.error{
+	width: 600px; 
+	margin: auto; 
+	margin-top:20%; 
+	border:1px solid #000;
+	border-radius: 6px;
+	display: block; 	
+}
+@keyframes animatebottom { 
+	from{ bottom:-100px; opacity:0 } 
+	to{ bottom:0; opacity:1 }
+}
+
+
+.nav-bar{
+	top: 0;
+	position: sticky;
+}
+.tr{
+	cursor: pointer;
+}
+#navbar{
+	transition-duration: 600ms;
+}
+
+.footer{
+	background: #343a40;
+	bottom: 0; 
+	margin: 0;
+	position: static; 
+	width: 100%; 
+	height:64px;
+	align-items: center;
+	display: flex;
+}
+.footer .text{
+	margin: auto;
+	align-items: center;
+	color: #fff;
+	text-align: center;
+	height: 32px;
+}
