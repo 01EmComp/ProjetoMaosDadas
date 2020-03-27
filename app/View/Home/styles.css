@@ -1,0 +1,13 @@
+.home-container{
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 62px auto;
+}
+.home-container .link-container{
+    transition: filter 200ms;
+}
+.home-container .link-container:hover{
+    filter: brightness(50%);
+}
+
