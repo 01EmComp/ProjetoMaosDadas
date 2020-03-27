@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?=NAME." ".$this->getTitle()?></title>
+	<title><?=NAME." - ".$this->getTitle()?></title>
 	<meta charset="utf-8">
 	<!--Favicon.ico-->
 	<link rel="shortcut icon" href="<?=DIRIMG?>favicon.ico" />
