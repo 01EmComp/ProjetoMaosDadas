@@ -4,19 +4,25 @@
 
     <div class="col-lg-3">
 
-      <h1 class="my-4">Categoria:</h1>
-      <div class="list-group">
-        <a href="legumes-frutas-horta.html" class="list-group-item">Legumes, frutas e hortaliças</a>
-        <a href="padaria-doces-salgados.html" class="list-group-item">Padaria, doces e salgados</a>
-        <a href="bebidas-laticinio.html" class="list-group-item">Bebidas e laticiníos</a>
-        <a href="carnes-ovos.html" class="list-group-item">Carnes e Ovo</a>
-        <a href="produtos-servicos.html" class="list-group-item">Produtos e serviços</a>
+     <div class="card">
+      <div class="card-head">
+        <h1  style="width: 100%; margin: auto; align-items: center;text-align: center;">Categorias:</h1>
       </div>
-
+      <div class="card-body">
+        <div class="list-group">
+          <a href="" class="list-group-item">Legumes, frutas e hortaliças</a>
+          <a href="" class="list-group-item">Padaria, doces e salgados</a>
+          <a href="" class="list-group-item">Bebidas e laticiníos</a>
+          <a href="" class="list-group-item">Carnes e Ovo</a>
+          <a href="" class="list-group-item">Produtos e serviços</a>
+        </div>
+      </div>
     </div>
-    <!-- /.col-lg-3 -->
 
-    <div class="col-lg-9">
+  </div>
+  <!-- /.col-lg-3 -->
+
+  <div class="col-lg-9">
       <!--
       <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -46,7 +52,9 @@
       </div>
     -->
 
-    <?=$this->tips()?>
+    <div class="row" style="background-color: #efefef;">
+      <?=$this->tips()?>
+    </div>
   </div>
 </div>
 </div>

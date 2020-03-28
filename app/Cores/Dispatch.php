@@ -25,7 +25,7 @@ class Dispatch extends Routes
 	{
 		$this->param = $param;
 	}
-	protected function getParam()
+	public function getParam()
 	{
 		return $this->param;
 	}

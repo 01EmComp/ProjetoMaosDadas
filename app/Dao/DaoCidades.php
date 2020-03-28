@@ -23,13 +23,16 @@ class DaoCidades
 			$query = "SELECT * FROM Cidades";
 			$stmt = $this->con->prepare($query);
 			$stmt->execute();
+			$cidade = new ModelCidades();
 			$cidades = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
-				$cidade = array("id" => $resultado['id'],
-					"nome" => $resultado['nome'], 
-					"cep" => $resultado['cep'],
-					"uf" => $resultado['uf'],
-					"img" => $resultado['img']);
+
+				$cidade->setIdCidade( $resultado['idCidade']);
+				$cidade->setNome($resultado['nome']); 
+				$cidade->setCep($resultado['cep']);
+				$cidade->setUf($resultado['uf']);
+				$cidade->setImg($resultado['img']);
+
 				array_push($cidades, $cidade);
 			}
 
@@ -40,9 +43,9 @@ class DaoCidades
 
 			$data['success'] = false;
 			$data['data'] = 'Error: '.$e->getMessage();
-		}
+		}	
 		//header("Content-Type: application/json; charset=UTF-8");
-		return json_encode($data);
+		return $data;
 	}
 
 
@@ -50,7 +53,7 @@ class DaoCidades
 	public function getName($id)
 	{
 		try {
-			$query = "SELECT nome FROM Cidades WHERE id = :id";
+			$query = "SELECT nome FROM Cidades WHERE idCidade = :id";
 
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':id',$id);

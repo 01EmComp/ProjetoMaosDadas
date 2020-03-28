@@ -15,10 +15,11 @@ class DaoTips {
 		try {
 			$query = "SELECT * FROM Tipos";
 			$stmt = $this->con->prepare($query);
+			
 			$stmt->execute();
 			$tips = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
-				$tip = array("id" => $resultado['id'],
+				$tip = array("id" => $resultado['idTipo'],
 					"nome" => $resultado['nome'], 
 					"descricao" => $resultado['descricao'],
 					"img" => $resultado['img']);

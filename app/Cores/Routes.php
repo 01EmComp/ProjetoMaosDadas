@@ -18,7 +18,7 @@
 		public function getRoute()
 		{
 			$this->routes = array("" => "HomeController"
-				,"home"=>"HomeController", "cidade"=>"CityController");
+				,"home"=>"HomeController", "cidade"=>"CityController","produtores" => "ProdutoresController");
 			$this->url = new UrlTrait();
 			$index = $this->url->traitUrl();
 			$aux = $index[0];
