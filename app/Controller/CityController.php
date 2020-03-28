@@ -2,7 +2,7 @@
 namespace App\Controller;
 use Classes\Render;
 use App\Dao\DaoCidades;
-use App\Dao\DaoTips;
+use App\Dao\DaoTipos;
 
 class CityController extends Render
 {
@@ -25,12 +25,11 @@ class CityController extends Render
 	}
 	public function tips()
 	{
-		$tips = new DaoTips;
+		$tips = new DaoTipos;
 		$tips= json_decode($tips->selectTips());
 
 		$result = "";
 		foreach ($tips->data as $key => $value) {
-
 			$result = $result.
 			'
 			<div class="col-lg-4 col-md-6 mb-4">
@@ -40,11 +39,19 @@ class CityController extends Render
 			<img class="card-img-top" src="'.DIRIMG.'tipos/'.$value->img.'" alt="'.$value->nome.'"/>
 			</a>
 			</div>
-			</div
+			</div>
 			</div>';
 		}
 		echo $result;
 
+	}
+	public function getNomeCidade()
+	{
+		if (isset($_SESSION['idCidade'])) {
+			$cidade = new DaoCidades();
+			$nome = json_decode($cidade->getNome($_SESSION['idCidade']));
+			echo $nome->data->nome;
+		}
 	}
 
 }
