@@ -7,6 +7,9 @@ class HomeController extends Render
 	
 	function __construct()
 	{
+		if(isset($_SESSION)){
+			session_destroy();
+		}
 		$this->setTitle("Home"); 
 		$this->setDescritpion("Pagina Home");
 		$this->setKeywords("home");
@@ -30,8 +33,8 @@ class HomeController extends Render
 			<div class="col-lg-4 col-md-6 mb-4">
 			<div class="card h-100">
 			<div class="img-container">
-			<a href="cidade/select/'.$value->idCidade.'">
-			<img class="card-img-top" src="'.DIRIMG.'cidades/'.$value->img.'" alt="'.$value->nome.'"/>
+			<a href="'.DIRPAGE.'cidade/select/'.$value->idCidade.'">
+			<img style="width:100%;height:100%;" class="card-img-top" src="'.DIRIMG.'cidades/'.$value->img.'" alt="'.$value->nome.'"/>
 			</a>
 			</div>
 			</div>
@@ -40,14 +43,6 @@ class HomeController extends Render
 		echo $resultado;
 	}
 
-	public function getNomeCidade()
-	{
-		if (isset($_SESSION['idCidade'])) {
-			$cidade = new DaoCidades();
-			$nome = json_decode($cidade->getNome($_SESSION['idCidade']));
-			echo $nome->data->nome;
-		}
-	}
 
 }
 

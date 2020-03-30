@@ -60,8 +60,8 @@ class Render
 	}
 	public function addNav()
 	{
-		if (file_exists(DIREQ."app/View/nav.php")) {
-			include DIREQ."app/View/nav.php";	
+		if (file_exists(DIREQ."app/View/".$this->getDir()."nav.php")) {
+			include DIREQ."app/View/".$this->getDir()."nav.php";	
 		}
 
 	}

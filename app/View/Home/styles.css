@@ -5,6 +5,8 @@
     margin: 64px auto;
 }
 .home-container .img-container{
+    max-width: 383px;
+    max-height: 182px;
     transition: filter 200ms;
 }
 .home-container .img-container:hover{

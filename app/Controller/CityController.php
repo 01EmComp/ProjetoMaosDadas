@@ -3,31 +3,40 @@ namespace App\Controller;
 use Classes\Render;
 use App\Dao\DaoCidades;
 use App\Dao\DaoTipos;
-
+use App\Cores\Params;
 class CityController extends Render
 {
+	private $idCidade;
 	
 	function __construct()
 	{
 		session_start();
+
+		$p = new Params();
+		$this->idCidade = $p->getParam()[0];
 		$this->setTitle("Cidades"); 
 		$this->setDescritpion("Pagina cidades");
 		$this->setKeywords("Cidades");
 		$this->setDir("Cidade/"); 
 		$this->renderLayout();
 	}
+	
+	public function getIdCidade()
+	{
+		return $this->idCidade;
+	}
+
 	public function select($city){
-		
-		$_SESSION['idCidade'] = $city;
+		$_SESSION['idCidade'] = $city;		
 		$cidade = new DaoCidades;
-		$name = json_decode($cidade->getName($city));
+		$name = json_decode($cidade->getNome($city));
 		return $name->data->nome;
 	}
-	public function tips()
-	{
-		$tips = new DaoTipos;
-		$tips= json_decode($tips->selectTips());
+	public function tips(){
 
+		$tips = new DaoTipos;
+		$tips= json_decode($tips->selectTiposCidade($this->idCidade));
+		
 		$result = "";
 		foreach ($tips->data as $key => $value) {
 			$result = $result.
@@ -41,19 +50,18 @@ class CityController extends Render
 			</div>
 			</div>
 			</div>';
+			}
+			echo $result;
+			
 		}
-		echo $result;
-
-	}
-	public function getNomeCidade()
-	{
-		if (isset($_SESSION['idCidade'])) {
+		public function getNomeCidade()
+		{
 			$cidade = new DaoCidades();
-			$nome = json_decode($cidade->getNome($_SESSION['idCidade']));
+			$nome = json_decode($cidade->getNome(self::getIdCidade()));
 			echo $nome->data->nome;
+			
 		}
+		
 	}
-
-}
-
-?>
+	
+	?>

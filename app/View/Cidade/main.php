@@ -31,7 +31,7 @@
     </div>
     <div class="card-body">
       <div class="row" style="background-color: #fff;">
-        <?=$this->tips()?>
+        <?=$this->tips($this->getIdCidade())?>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@
 	<title><?=NAME." - ".$this->getTitle()?></title>
 	<meta charset="utf-8">
 	<!--Favicon.ico-->
-	<link rel="shortcut icon" href="<?=DIRIMG?>favicon.ico" />
+	<link rel="shortcut icon" href="<?=DIRIMG?>favicon.ico" style="width:100%;heght:100%;"/>
 	<!--Bootstrap-->
 	<link rel="stylesheet" type="text/css" href="<?=DIRPAGE.'vendor/twbs/bootstrap/dist/css/bootstrap.min.css'?>">
 	<!--Local css-->
@@ -27,6 +27,7 @@
 		<?=$this->addFooter()?>
 	</div>
 	<br>
+	
 	<div class="footer">
 		<p class="text">
 			Copyright &copy; Projeto Mãos Dadas 2020 - Desenvolvido por: EmComp

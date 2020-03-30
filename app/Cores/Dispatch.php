@@ -31,7 +31,7 @@ class Dispatch extends Routes
 	}
 	private function addController()
 	{
-			$route = $this->getRoute();
+		$route = $this->getRoute();
 		$nameS = "App\\Controller\\{$route}";
 		$this->obj = new $nameS;
 		if (isset($this->traitUrl()[1])) {
@@ -45,7 +45,7 @@ class Dispatch extends Routes
 			call_user_func_array([$this->obj,$this->getMethod()],$this->getParam());
 		}
 	}
-	private function addParam(){
+	public function addParam(){
 		$countArray = count($this->traitUrl()); 
 		if ($countArray >2) {
 			foreach ($this->traitUrl() as $key => $value) {
