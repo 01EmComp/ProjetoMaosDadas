@@ -20,7 +20,7 @@ class DaoCidades
 	public function selectCidades()
 	{
 		try {
-			$query = "SELECT * FROM Cidades ORDER BY nome ASC";
+			$query = "SELECT * FROM Cidades ORDER BY ordemExibicao ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->execute();
 			$cidade = new ModelCidades();
@@ -96,6 +96,10 @@ class DaoCidades
 					
 					$data['success'] = true;
 					$data['data'] = $cidade;
+				}
+				else{
+					$data['success'] = false;
+					$data['data'] = $stmt->errorInfo();
 				}
 			} catch (Exception $e) {
 				

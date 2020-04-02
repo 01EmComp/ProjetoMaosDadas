@@ -9,7 +9,7 @@
 			<input type="password" name="password" id="senha" placeholder="Senha" required>
 			<br>
 			<center>
-				<div class="g-recaptcha" data-sitekey="6LfKZ74UAAAAAF2TXx7yJ_YDmI-76hHPkyPwX2dL	" id="captcha"></div>
+				<div class="g-recaptcha" data-sitekey="6LfKZ74UAAAAAF2TXx7yJ_YDmI-76hHPkyPwX2dL" id="captcha"></div>
 				<p hidden id="alert" data-callback="recaptchaCallback" style="color:#f00; font-size: 19px; font-family: arial; background-color: #000;">&emsp;</p>
 			</center>
 			<br>

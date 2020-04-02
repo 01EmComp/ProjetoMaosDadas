@@ -15,6 +15,12 @@ class Connection
 		$this->db_name = "projetoMaosDadas";
 		$this->username = "root";
 		$this->password = "";
+		/*
+		$this->host = "localhost";
+		$this->db_name = "emcomprp_ProjetoMaosDadas";
+		$this->username = "emcomprp_root";
+		$this->password = "Lhy7k9L9v5";
+		*/
 		self::getConn();
 	}
 	public  function getConn(){

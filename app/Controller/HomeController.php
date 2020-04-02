@@ -34,7 +34,10 @@ class HomeController extends Render
 			<div class="card h-100">
 			<div class="img-container">
 			<a href="'.DIRPAGE.'cidade/select/'.$value->idCidade.'">
-			<img style="width:100%;height:100%;" class="card-img-top" src="'.DIRIMG.'cidades/'.$value->img.'" alt="'.$value->nome.'"/>
+			<span class="img-mask">'.$value->nome.'</span>
+			<div>
+			<img class="card-img-top" src="'.DIRIMG.'cidades/'.$value->img.'" alt="'.$value->nome.'"/>
+			</div>
 			</a>
 			</div>
 			</div>

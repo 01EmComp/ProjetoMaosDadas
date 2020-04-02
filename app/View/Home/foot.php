@@ -1,0 +1,1 @@
+<script src="<?=DIRPAGE?>app/View/Home/script.js"></script>

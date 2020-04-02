@@ -4,13 +4,44 @@
     padding: 0 30px;
     margin: 64px auto;
 }
+
+.car-img-top img{
+    max-height:182px;
+    min-height: 100px;
+}
+
 .home-container .img-container{
-    max-width: 383px;
-    max-height: 182px;
-    transition: filter 200ms;
+    transition: filter 300ms;
+    display: flex;
+    position: relative;
+    width: 100%;
+    z-index: 0;
 }
 .home-container .img-container:hover{
     filter: brightness(50%);
+}
+a{
+    color: #fff;
+}
+a:hover{
+    color: #fff;
+}
+.home-container .img-container img{
+    filter: contrast(20%) blur(1px);
+    transition: filter 200ms;
+
+}
+.home-container .img-container span{
+    min-height: 170px;
+    text-align: center;
+    align-content: center;
+    font-size:42px;
+    width: 100%;
+    height: 100%;
+    top: 30%;
+    text-decoration: none;
+    position: absolute;
+    z-index: 1;
 }
 
 .carrousel-container img{

@@ -12,6 +12,11 @@ else{
 	define('DIREQ', "{$_SERVER['DOCUMENT_ROOT']}/{$pastaInterna}");
 }
 
+#chaves recaptcha emcomp
+define('privKey','6Le_VOUUAAAAAONPjXkSrJrWUY0Gpkd6o2TKPWTc');
+define('pubKey','6Le_VOUUAAAAAPhybnXynayfpSodILffMvdraUiR');
+
+
 #diretorios especificos
 define('DIRIMG', "http://{$_SERVER['HTTP_HOST']}/{$pastaInterna}public/img/");
 define('DIRCSS', "http://{$_SERVER['HTTP_HOST']}/{$pastaInterna}public/css/");
