@@ -17,6 +17,7 @@ class ModelProdutor
 	private $formaEntrega;
 	private $img;
 	private $descricao;
+	private $keyWords;
 	private $idTipo;
 	
 	function __construct()
@@ -31,6 +32,7 @@ class ModelProdutor
 		$this->formaEntrega = "";
 		$this->img = "";
 		$this->descricao = "";
+		$this->keyWords = "";
 		$this->idTipo = "";
 	}
 
@@ -118,6 +120,14 @@ class ModelProdutor
 
 	public function setDescricao($descricao){
 		$this->descricao = $descricao;
+	}
+
+	public function getKeyWords(){
+		return $this->keyWords;
+	}
+
+	public function setKeyWords($keyWords){
+		$this->keyWords = $keyWords;
 	}
 
 	

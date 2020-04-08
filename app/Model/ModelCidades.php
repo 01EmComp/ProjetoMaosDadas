@@ -12,7 +12,7 @@ class ModelCidades
 	private $cep;
 	private $uf;
 	private $img;
-
+	private $ordemExibicao;
 
 	function __construct()
 	{
@@ -61,5 +61,12 @@ class ModelCidades
 
 	public function setImg($img){
 		$this->img = $img;
+	}
+	public function getOrdemExibicao(){
+		return $this->ordemExibicao;
+	}
+
+	public function setOrdemExibicao($ordemExibicao){
+		$this->ordemExibicao = $ordemExibicao;
 	}
 }

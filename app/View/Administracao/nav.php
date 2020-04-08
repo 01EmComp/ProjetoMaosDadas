@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" href="<?=DIRPAGE?>administracao">Projeto Mãos Dadas <span id="name">Administração</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#" data-toggle="modal" id="btncadastraProdutor"
            data-target="#modalCadastraProdutores">Cadastrar</a>
-          <a class="dropdown-item" href="#">Editar</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" id="btnEditaProdutor"
+           data-target="#modalEditaProdutor">Editar</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Apagar</a>
         </div>

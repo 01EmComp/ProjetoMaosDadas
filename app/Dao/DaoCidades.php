@@ -80,12 +80,14 @@ class DaoCidades
 		public function cadastraCidade(ModelCidades $cidade)
 		{
 			try {
-				$query = "INSERT INTO `Cidades`(`nome`, `cep`, `uf`,`img`) VALUES(:nome, :cep, :uf,:img);";
+				$query = "INSERT INTO `Cidades`(`nome`, `cep`, `uf`,`img`,`ordemExibicao`) 
+				VALUES(:nome, :cep, :uf,:img, :ordem);";
 				$stmt = $this->con->prepare($query);
 				$stmt->bindValue(':nome',$cidade->getNome());
 				$stmt->bindValue(':cep',$cidade->getCep());
 				$stmt->bindValue(':uf',$cidade->getUf());
 				$stmt->bindValue(':img','');
+				$stmt->bindValue(':ordem',1);
 				
 				if($stmt->execute()){
 					$stmt = $this->con->prepare("SELECT MAX(idCidade) AS id FROM `Cidades`");

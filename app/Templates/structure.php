@@ -28,10 +28,15 @@
 	</div>
 	<br>
 	
-	<div class="footer">
-		<p class="text">
-			Copyright &copy; Projeto Mãos Dadas 2020 - Desenvolvido por: EmComp
-		</p>
+	<div class="bg-light pb-5 footer">
+		<div class="container text-center">
+			<p class="text-muted mb-0">
+				Copyright &copy; Projeto Mãos Dadas 2020 - Desenvolvido por:
+			<p> 
+			<a href="emcomp.com.br" target="_blank">
+				<img style="width:150px; height:50px;" src="<?=DIRIMG?>logoEmcomp.png" alt="Logo Emcomp">
+			</a>
+		</div>
 	</div>
 </body>
 <!--Script do reCATPTCHA da google-->

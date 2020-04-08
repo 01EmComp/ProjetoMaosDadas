@@ -17,17 +17,17 @@ class SessionController
                 
                 $verifica = new DaoUsuarios();
                 $user = json_decode($verifica->verificaLogin($_POST['login'],$_POST['senha']));
-                if(true){
+                if($user->success){
                     session_start();
                     $_SESSION['idAdmin'] = $user->data->idAdmin;
                     $_SESSION['login'] = $user->data->login;
                     
                     echo json_encode(array("success" => true));
                 }else{
-                    echo json_encode(array("success" => false,"msg"=>"falhou captcha"));
+                    echo json_encode(array("success" => false,"msg"=>"Usuario ou senha incorretos"));
                 }
             }else{
-                echo json_encode(array("success" => false));
+                echo json_encode(array("success" => false,"msg"=>"falhou captcha"));
             }
         }else{
             echo json_encode(array("success" => false));

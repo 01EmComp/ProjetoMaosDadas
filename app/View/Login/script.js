@@ -1,8 +1,8 @@
 var domain = document.domain;
 var path = window.location.pathname;
-var pasta = path.split('/')[1];
+
 //Cria dinamicamente onde se deve fazer as requisiçoes dinamicas
-var urlRequisicao = window.location.origin + '/'+ pasta;
+var urlRequisicao = window.location.origin;
 
 
 $(document).ready(function() {
@@ -10,14 +10,7 @@ $(document).ready(function() {
   $("#loginForm").submit( async function(event) {
     await event.preventDefault();
     
-    var googleResponse = jQuery('#g-recaptcha-response').val();
-    if (!googleResponse) {
-      var a = document.getElementById('alert');
-      a.hidden = false;
-      a.innerText = "Marque o captcha primeiro";
-      
-      return;
-    }
+
     
     await $("#loginContainer").hide();
     await $("#loader").show();

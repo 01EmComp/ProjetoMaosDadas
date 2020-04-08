@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 30, 2020 at 07:28 AM
+-- Generation Time: Apr 05, 2020 at 03:10 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -47,8 +47,17 @@ CREATE TABLE `Cidades` (
   `nome` varchar(200) COLLATE utf8_bin NOT NULL,
   `cep` varchar(10) COLLATE utf8_bin NOT NULL,
   `uf` varchar(2) COLLATE utf8_bin NOT NULL,
-  `img` varchar(20) COLLATE utf8_bin NOT NULL
+  `img` varchar(20) COLLATE utf8_bin NOT NULL,
+  `ordemExibicao` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Triggers `Cidades`
+--
+DELIMITER $$
+CREATE TRIGGER `IncrememtaOrdem` BEFORE INSERT ON `Cidades` FOR EACH ROW SET NEW.ordemExibicao = (SELECT MAX(ordemExibicao)+1 FROM Cidades)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -66,6 +75,7 @@ CREATE TABLE `Produtores` (
   `formaPagamento` varchar(50) COLLATE utf8_bin NOT NULL,
   `formaEntrega` varchar(50) COLLATE utf8_bin NOT NULL,
   `img` varchar(50) COLLATE utf8_bin NOT NULL,
+  `keyWords` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `descricao` varchar(144) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -94,16 +104,6 @@ CREATE TABLE `Tipos` (
   `img` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `Tipos`
---
-
-INSERT INTO `Tipos` (`idTipo`, `nome`, `descricao`, `img`) VALUES
-(1, 'Bebidas e laticinios', '', 'tipo1.jpg'),
-(2, 'Serviços', '', 'tipo2.jpg'),
-(3, 'Pães', '', 'tipo3.jpg'),
-(4, 'Frutas, Legumes e Verduras', '', 'tipo4.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -116,6 +116,25 @@ CREATE TABLE `VisaoFiltroCidadeTipos` (
 ,`descricao` text
 ,`img` varchar(100)
 ,`idCidade` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `VisaoGeralPodutorCidade`
+-- (See below for the actual view)
+--
+CREATE TABLE `VisaoGeralPodutorCidade` (
+`idProdutor` int(11)
+,`nomeProdutor` varchar(200)
+,`nomeSocial` varchar(200)
+,`whatsapp` varchar(14)
+,`endereco` text
+,`img` varchar(50)
+,`descricao` varchar(144)
+,`formaPagamento` varchar(50)
+,`formaEntrega` varchar(50)
+,`nomeCidade` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -141,7 +160,16 @@ CREATE TABLE `VisãoGeralTiposProdutores` (
 --
 DROP TABLE IF EXISTS `VisaoFiltroCidadeTipos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `VisaoFiltroCidadeTipos`  AS  select `Tipos`.`idTipo` AS `idTipo`,`Tipos`.`nome` AS `nome`,`Tipos`.`descricao` AS `descricao`,`Tipos`.`img` AS `img`,`Produtores`.`idCidade` AS `idCidade` from ((`Tipos` join `ProdutoresTipos`) join `Produtores`) where `Produtores`.`idProdutor` = `ProdutoresTipos`.`id` and `Tipos`.`idTipo` = `ProdutoresTipos`.`idTipo` ;
+CREATE VIEW `VisaoFiltroCidadeTipos`  AS  select `Tipos`.`idTipo` AS `idTipo`,`Tipos`.`nome` AS `nome`,`Tipos`.`descricao` AS `descricao`,`Tipos`.`img` AS `img`,`Produtores`.`idCidade` AS `idCidade` from ((`Tipos` join `ProdutoresTipos`) join `Produtores`) where `Produtores`.`idProdutor` = `ProdutoresTipos`.`id` and `Tipos`.`idTipo` = `ProdutoresTipos`.`idTipo` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `VisaoGeralPodutorCidade`
+--
+DROP TABLE IF EXISTS `VisaoGeralPodutorCidade`;
+
+CREATE VIEW `VisaoGeralPodutorCidade`  AS  (select `Produtores`.`idProdutor` AS `idProdutor`,`Produtores`.`nome` AS `nomeProdutor`,`Produtores`.`nomeSocial` AS `nomeSocial`,`Produtores`.`whatsapp` AS `whatsapp`,`Produtores`.`endereco` AS `endereco`,`Produtores`.`img` AS `img`,`Produtores`.`descricao` AS `descricao`,`Produtores`.`formaPagamento` AS `formaPagamento`,`Produtores`.`formaEntrega` AS `formaEntrega`,`Cidades`.`nome` AS `nomeCidade` from (`Produtores` join `Cidades`) where `Produtores`.`idCidade` = `Cidades`.`idCidade`) ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +178,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `VisãoGeralTiposProdutores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `VisãoGeralTiposProdutores`  AS  (select `Tipos`.`idTipo` AS `idTipo`,`Produtores`.`idProdutor` AS `idProdutor`,`Cidades`.`idCidade` AS `idCidade`,`Produtores`.`img` AS `img`,`Produtores`.`nome` AS `nome`,`Produtores`.`descricao` AS `descricao`,`Produtores`.`whatsapp` AS `whatsapp` from (((`ProdutoresTipos` join `Produtores`) join `Cidades`) join `Tipos`) where `ProdutoresTipos`.`idProdutor` = `Produtores`.`idProdutor` and `ProdutoresTipos`.`idTipo` = `Tipos`.`idTipo` and `Produtores`.`idCidade` = `Cidades`.`idCidade`) ;
+CREATE VIEW `VisãoGeralTiposProdutores`  AS  (select `Tipos`.`idTipo` AS `idTipo`,`Produtores`.`idProdutor` AS `idProdutor`,`Cidades`.`idCidade` AS `idCidade`,`Produtores`.`img` AS `img`,`Produtores`.`nome` AS `nome`,`Produtores`.`descricao` AS `descricao`,`Produtores`.`whatsapp` AS `whatsapp` from (((`ProdutoresTipos` join `Produtores`) join `Cidades`) join `Tipos`) where `ProdutoresTipos`.`idProdutor` = `Produtores`.`idProdutor` and `ProdutoresTipos`.`idTipo` = `Tipos`.`idTipo` and `Produtores`.`idCidade` = `Cidades`.`idCidade`) ;
 
 --
 -- Indexes for dumped tables
@@ -221,7 +249,7 @@ ALTER TABLE `ProdutoresTipos`
 -- AUTO_INCREMENT for table `Tipos`
 --
 ALTER TABLE `Tipos`
-  MODIFY `idTipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idTipo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

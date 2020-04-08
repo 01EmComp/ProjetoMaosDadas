@@ -1,5 +1,4 @@
 <?php 
-
 namespace App\Controller;
 use Classes\Render;
 class ErrorController extends Render

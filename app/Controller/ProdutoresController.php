@@ -14,14 +14,14 @@ class ProdutoresController extends Render
 {
 	
 	private $idTipo;
-	
+	private $idCidade;
 	function __construct()
 	{
 		session_start();
 		
 		$p = new Params();
 		$this->idTipo = $p->getParam()[0]; 
-		
+		$this0->idCidade = $_SESSION['idCidade'];
 		$this->setTitle("Produtores"); 
 		$this->setDescritpion("Pagina produtores");
 		$this->setKeywords("Produtores");
@@ -48,7 +48,7 @@ class ProdutoresController extends Render
 	}
 	public function selectProdutores()
 	{
-		if (isset($_SESSION['idTipo']) && isset($_SESSION['idCidade'])) {
+		if (isset($_SESSION['idCidade'])) {
 			$tipo = $_SESSION['idTipo'];
 			$cidade = $_SESSION['idCidade'];
 			$produtores = new DaoProdutores();
@@ -82,7 +82,8 @@ class ProdutoresController extends Render
 					Valores a serem consultados com o vendedor
 					</p>
 					</div>
-					<a class="list-group-item" href="https://api.whatsapp.com/send?phone='.$value->whatsapp.'	&text==Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A">
+					<a class="list-group-item" href="https://api.whatsapp.com/send?phone='.$value->whatsapp.'
+					&text==Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">
 					<div class="card-footer">
 					<img class="card-img-top" src="'.DIRIMG.'wpp.png" alt="">
 					</div>
@@ -97,9 +98,25 @@ class ProdutoresController extends Render
 				
 			}
 			echo $result;
-			
-			
 		}
+	}
+	
+	public function getMenu(){
+		
+		$tips = new DaoTipos;
+		$tips= json_decode($tips->selectTiposCidade($this->idCidade));
+		var_dump($tips);
+		$result = "";
+		foreach ($tips->data as $key => $value) {
+			$result = $result.
+			'
+			<a href="'.DIRPAGE.'produtores/tipo/'.$value->id.'">
+			'.$value->nome.$this->idCidade.'
+			</a>';
+		}
+
+		echo $result;
+		
 	}
 	
 }

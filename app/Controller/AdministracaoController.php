@@ -8,8 +8,7 @@ use App\Dao\DaoProdutores;
 class AdministracaoController extends Render
 {
     
-    function __construct()
-    {
+    function __construct(){
         session_start();
         if(isset($_SESSION['idAdmin'])){
             $this->setTitle("Administração"); 
@@ -20,5 +19,8 @@ class AdministracaoController extends Render
         }else{
             header('location:'.DIRPAGE.'error/401');
         }
+    }
+    public function editarProdutor(){     
+    
     }
 }

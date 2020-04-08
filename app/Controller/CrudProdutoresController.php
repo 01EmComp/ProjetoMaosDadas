@@ -7,12 +7,13 @@ use App\Dao\DaoTipos;
 use Classes\UploadImagens;
 
 class CrudProdutoresController{
-    
+
     public function cadastrar(){
         
         if((isset($_POST['nome']))&&(isset($_POST['nomeSocial']))&&(isset($_POST['whatsapp']))
         &&(isset($_POST['endereco']))&&(isset($_POST['formaPagamento']))&&(isset($_POST['idCidade']))
-        &&(isset($_POST['formaEntrega']))&&(isset($_POST['descricao']))&&(isset($_POST['idTipo']))){
+        &&(isset($_POST['formaEntrega']))&&(isset($_POST['descricao']))&&(isset($_POST['idTipo']))
+        &&(isset($_POST['keywords']))){
             
             $produtor = new ModelProdutor();
             
@@ -24,6 +25,7 @@ class CrudProdutoresController{
             $produtor->setFormaPagamento($_POST['formaPagamento']);
             $produtor->setFormaEntrega($_POST['formaEntrega']);
             $produtor->setDescricao($_POST['descricao']);
+            $produtor->setKeyWords($_POST['keywords']);
             $produtor->setIdTipo($_POST['idTipo']);
             
             $daoProdutor = new DaoProdutores();
@@ -62,6 +64,68 @@ class CrudProdutoresController{
         echo json_encode($data);
     }
     
+
+    public function editar($idProdutor){
+
+
+        if((isset($_POST['nome']))&&(isset($_POST['nomeSocial']))&&(isset($_POST['whatsapp']))
+        &&(isset($_POST['endereco']))&&(isset($_POST['formaPagamento']))&&(isset($_POST['idCidade']))
+        &&(isset($_POST['formaEntrega']))&&(isset($_POST['descricao']))&&(isset($_POST['idTipo']))
+        &&(isset($_POST['keywords']))){
+            
+
+            $produtor = new ModelProdutor();
+            
+            $produtor->setId($idProdutor);
+            $produtor->setNome($_POST['nome']);
+            $produtor->setIdCidade($_POST['idCidade']);
+            $produtor->setNomeSocial($_POST['nomeSocial']);
+            $produtor->setWhatsapp($_POST['whatsapp']);
+            $produtor->setEndereco($_POST['endereco']);
+            $produtor->setFormaPagamento($_POST['formaPagamento']);
+            $produtor->setFormaEntrega($_POST['formaEntrega']);
+            $produtor->setDescricao($_POST['descricao']);
+            $produtor->setKeyWords($_POST['keywords']);
+            $produtor->setIdTipo($_POST['idTipo']);
+            $daoProdutor = new DaoProdutores();
+
+            if($daoProdutor->editar($produtor)){
+                
+                if(isset($_FILES['img'])){
+                    try {
+                        $img = $_FILES['img'];
+                        $upload = new UploadImagens();
+                        $upload->EditaProdutor($idProdutor,$img);
+                        
+                        $data['success']=true;
+                        $data['msg'] = "Produtor Editado com sucesso";
+                    } catch (Exception $e) {
+                        $data['success']=true;
+                        $data['msg'] = $e->getMessage();
+                    }
+                }
+                else{
+                    $data['success']=true;
+                    $data['msg'] = "Imagem não modificada";
+                }
+            }
+            else{
+                $data['success']=false;
+                $data['msg'] = "Erro ao editar produtor";
+            }
+        }
+        else{
+            $data['success']=true;
+            $data['msg'] = "Erro ao modificar produtor, faltaram dados.";
+        }
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($data);
+    }
+
+
+
+
+
     public function getCidades(){
         $cidades = new DaoCidades();
         $cidades = json_decode($cidades->selectCidades());
@@ -75,6 +139,22 @@ class CrudProdutoresController{
             header("Content-Type: application/json; charset=UTF-8");
             echo json_encode($citys);
         }
+
+        public function getProdutores($cidade){
+
+            $daoProdutores = new DaoProdutores();
+            $daoProdutores = json_decode($daoProdutores->selectProdutores($cidade));
+            $produtores = array();
+            foreach ($daoProdutores->data as $key => $value) {
+                $produtor = array(
+                    "idProdutor" => $value->idProdutor,
+                    "nome" => $value->nome);
+                    array_push($produtores,$produtor);                
+                }
+                header("Content-Type: application/json; charset=UTF-8");
+                echo json_encode($produtores);
+            }
+
         public function getTipos(){
             $daoTipos = new DaoTipos();
             $result = json_decode($daoTipos->getTipos());

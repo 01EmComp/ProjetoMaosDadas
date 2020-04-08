@@ -1,8 +1,8 @@
 var domain = document.domain;
 var path = window.location.pathname;
-var pasta = path.split('/')[1];
+
 //Cria dinamicamente onde se deve fazer as requisiçoes dinamicas
-var urlRequisicao = window.location.origin + '/'+ pasta;
+var urlRequisicao = window.location.origin + '/';
 
 $(document).ready(async () => {
 
@@ -23,7 +23,7 @@ $(document).ready(async () => {
         
         
         await  $.ajax({
-            url: urlRequisicao+'/crudcidades/cadastrar', //o arquivo para o qual deseja fazer a requisição
+            url: urlRequisicao+'crudcidades/cadastrar', //o arquivo para o qual deseja fazer a requisição
             type: 'POST', //metodo de envio
             
             data: form,
@@ -35,7 +35,6 @@ $(document).ready(async () => {
                 if(resposta.success){
                     await alert(resposta.msg);
                     await $('#formCadastroCidades').trigger("reset");
-                    await $("#modalCadastraCidades").modal('hide');
                     await $("#btnCadastrarCidade").attr("disabled", false);
                 }
                 else{

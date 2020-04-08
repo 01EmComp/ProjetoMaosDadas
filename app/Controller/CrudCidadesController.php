@@ -13,6 +13,7 @@ class CrudCidadesController {
             $cidade->setNome($_POST['nome']);
             $cidade->setCep($_POST['cep']);
             $cidade->setUf($_POST['uf']);
+
             
             $daoCidade = new DaoCidades();
             $id = json_decode($daoCidade->cadastraCidade($cidade));
@@ -21,7 +22,7 @@ class CrudCidadesController {
                 try {
                     $upload = new UploadImagens();
                     $upload->cidade($id->data->idCidade, $_FILES['img']); 
-                    echo json_encode(array("success"=> true,"msg"=>"Imagem cadastrada com sucesso"));
+                    echo json_encode(array("success"=> true,"msg"=>"Cidade cadastrada com sucesso"));
                 } catch (Exception $e) {
                     echo json_encode(array("success"=> false,"msg"=>$e->getMessage()));
                     

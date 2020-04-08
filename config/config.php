@@ -1,6 +1,6 @@
 <?php 
 #arquivos diretorios raizes
-$pastaInterna ="Projeto/";
+$pastaInterna ="";
 //nome do sistema
 define('NAME', 'Mãos dadas');
 
@@ -13,8 +13,8 @@ else{
 }
 
 #chaves recaptcha emcomp
-define('privKey','6Le_VOUUAAAAAONPjXkSrJrWUY0Gpkd6o2TKPWTc');
-define('pubKey','6Le_VOUUAAAAAPhybnXynayfpSodILffMvdraUiR');
+define('PrivKey','6Le_VOUUAAAAAONPjXkSrJrWUY0Gpkd6o2TKPWTc');
+define('PubKey','6Le_VOUUAAAAAPhybnXynayfpSodILffMvdraUiR');
 
 
 #diretorios especificos
