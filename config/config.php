@@ -12,9 +12,9 @@ else{
 	define('DIREQ', "{$_SERVER['DOCUMENT_ROOT']}/{$pastaInterna}");
 }
 
-#chaves recaptcha emcomp
-define('PrivKey','6Le_VOUUAAAAAONPjXkSrJrWUY0Gpkd6o2TKPWTc');
-define('PubKey','6Le_VOUUAAAAAPhybnXynayfpSodILffMvdraUiR');
+#chaves recaptcha Keys
+define('PrivKey','');
+define('PubKey','');
 
 
 #diretorios especificos
