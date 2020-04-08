@@ -1,0 +1,12 @@
+html,body{
+    height: 100vh;
+}
+.adminstracaoContainer{
+    margin-top: 110px;
+    min-height: 56vh;
+}
+
+#imgProdutorEditar{
+    width: 350px;
+    height: 218px;
+}
