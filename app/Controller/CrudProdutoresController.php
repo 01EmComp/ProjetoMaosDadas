@@ -7,7 +7,16 @@ use App\Dao\DaoTipos;
 use Classes\UploadImagens;
 
 class CrudProdutoresController{
-
+    
+    function __construct(){
+        session_start();
+        if(!isset($_SESSION['idAdmin'])){
+            header("Content-Type: application/json; charset=UTF-8");
+            echo json_encode(array("success"=>false,"msg"=>"Você não tem permissão para isso."));
+            header('location:'.DIRPAGE.'error');
+        }
+    }
+    
     public function cadastrar(){
         
         if((isset($_POST['nome']))&&(isset($_POST['nomeSocial']))&&(isset($_POST['whatsapp']))
@@ -64,16 +73,16 @@ class CrudProdutoresController{
         echo json_encode($data);
     }
     
-
+    
     public function editar($idProdutor){
-
-
+        
+        
         if((isset($_POST['nome']))&&(isset($_POST['nomeSocial']))&&(isset($_POST['whatsapp']))
         &&(isset($_POST['endereco']))&&(isset($_POST['formaPagamento']))&&(isset($_POST['idCidade']))
         &&(isset($_POST['formaEntrega']))&&(isset($_POST['descricao']))&&(isset($_POST['idTipo']))
         &&(isset($_POST['keywords']))){
             
-
+            
             $produtor = new ModelProdutor();
             
             $produtor->setId($idProdutor);
@@ -88,14 +97,14 @@ class CrudProdutoresController{
             $produtor->setKeyWords($_POST['keywords']);
             $produtor->setIdTipo($_POST['idTipo']);
             $daoProdutor = new DaoProdutores();
-
+            
             if($daoProdutor->editar($produtor)){
                 
                 if(isset($_FILES['img'])){
                     try {
                         $img = $_FILES['img'];
                         $upload = new UploadImagens();
-                        $upload->EditaProdutor($idProdutor,$img);
+                        $upload->produtor($idProdutor,$img);
                         
                         $data['success']=true;
                         $data['msg'] = "Produtor Editado com sucesso";
@@ -121,11 +130,38 @@ class CrudProdutoresController{
         header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($data);
     }
+    
+    
+    
+    
+    public function apagar($idProdutor)
+    {
+        $DaoProdutores = new DaoProdutores();
+        $nome = json_decode($DaoProdutores->selectProdutor($idProdutor));
+        
+        if($DaoProdutores->apagar($idProdutor)){
+            $upload = new UploadImagens();
+            if(substr($nome->data->img,0,7)!="default"){
 
+                if($upload->apagar("produtores/",$nome->data->img)){
+                    $data = array("success"=>true,"msg"=>"Tudo apagado");
+                }
+                else{
+                    $data = array("success"=>true,"msg"=>"Erro ao apagar imagem");
+                }
 
-
-
-
+            }
+        }
+        else{
+            $data = array("success"=>false,"msg"=>"Nada apagado.");
+        }
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($data);
+    }
+    
+    
+    
+    
     public function getCidades(){
         $cidades = new DaoCidades();
         $cidades = json_decode($cidades->selectCidades());
@@ -139,9 +175,9 @@ class CrudProdutoresController{
             header("Content-Type: application/json; charset=UTF-8");
             echo json_encode($citys);
         }
-
+        
         public function getProdutores($cidade){
-
+            
             $daoProdutores = new DaoProdutores();
             $daoProdutores = json_decode($daoProdutores->selectProdutores($cidade));
             $produtores = array();
@@ -154,30 +190,30 @@ class CrudProdutoresController{
                 header("Content-Type: application/json; charset=UTF-8");
                 echo json_encode($produtores);
             }
-
-        public function getTipos(){
-            $daoTipos = new DaoTipos();
-            $result = json_decode($daoTipos->getTipos());
-            $tipos = array();
-            foreach ($result->data as $key => $value) {
-                $tipo = array(
-                    "idTipo" => $value->idTipo,
-                    "nome" => $value->nome);
-                    array_push($tipos,$tipo);                
+            
+            public function getTipos(){
+                $daoTipos = new DaoTipos();
+                $result = json_decode($daoTipos->getTipos());
+                $tipos = array();
+                foreach ($result->data as $key => $value) {
+                    $tipo = array(
+                        "idTipo" => $value->idTipo,
+                        "nome" => $value->nome);
+                        array_push($tipos,$tipo);                
+                    }
+                    header("Content-Type: application/json; charset=UTF-8");
+                    echo json_encode($tipos);
                 }
-                header("Content-Type: application/json; charset=UTF-8");
-                echo json_encode($tipos);
+                
+                public function selectProdutor($idProdutor){
+                    $daoProdutor = new DaoProdutores();
+                    $produtor = $daoProdutor->selectProdutor($idProdutor);
+                    
+                    header("Content-Type: application/json; charset=UTF-8");
+                    echo $produtor;
+                }   
+                
             }
             
-            public function selectProdutor($idProdutor){
-                $daoProdutor = new DaoProdutores();
-                $produtor = $daoProdutor->selectProdutor($idProdutor);
-                
-                header("Content-Type: application/json; charset=UTF-8");
-                echo $produtor;
-            }   
             
-        }
-        
-        
-        ?>
+            ?>

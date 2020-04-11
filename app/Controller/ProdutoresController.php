@@ -37,7 +37,7 @@ class ProdutoresController extends Render
 	{
 		
 		$tipo = new DaoTipos();
-		$tipo = $tipo->getNomeTipo($this->idTipo);
+		$tipo = $tipo->getTipo($this->idTipo);
 		$tipo =json_decode($tipo);
 		if ($tipo->success) {
 			echo $tipo->data->nome;

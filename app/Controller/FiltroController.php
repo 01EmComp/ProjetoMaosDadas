@@ -13,11 +13,12 @@ class FiltroController{
         echo $produtores;
     }
 
-    public function todosProdutores($idCidade)
-    {
+    public function todosProdutores($idCidade){
+
         $daoProdutores = new DaoProdutores();
         $produtores = $daoProdutores->selectProdutores($idCidade);
         echo $produtores;
+        
     }
 
 }

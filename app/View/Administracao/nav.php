@@ -12,9 +12,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalCadastraCidades" id="cidadeCadastrar">Cadastrar</a>
-          <a class="dropdown-item" href="#">Editar</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEditaCidade">Editar</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Apagar</a>
+          <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalApagaCidade">Apagar</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -27,18 +27,18 @@
           <a class="dropdown-item" href="#" data-toggle="modal" id="btnEditaProdutor"
            data-target="#modalEditaProdutor">Editar</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Apagar</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalApagaProdutor">Apagar</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Tipos
+           Categoria
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalCadastraTipos">Cadastrar</a>
-          <a class="dropdown-item" href="#">Editar</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalEditaCategoria">Editar</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Apagar</a>
+          <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalApagaCategoria">Apagar</a>
         </div>
       </li>
         <li class="nav-item">

@@ -114,7 +114,7 @@ class CityController extends Render
 	public function getNomeCidade()
 	{
 		$cidade = new DaoCidades();
-		$nome = json_decode($cidade->getNome(self::getIdCidade()));
+		$nome = json_decode($cidade->selectCidade(self::getIdCidade()));
 		echo $nome->data->nome;
 		
 	}

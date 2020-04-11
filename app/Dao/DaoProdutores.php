@@ -190,7 +190,7 @@ class DaoProdutores
 			`whatsapp`=:whatsapp,`endereco`=:endereco,`formaPagamento`=:pagamento,`formaEntrega`=:entrega,
 			`keyWords`=:keywords,`descricao`=:descricao WHERE `idProdutor` = :idProdutor";
 			$stmt = $this->con->prepare($query);
-
+			
 			$stmt->bindValue(':idCidade',$produtor->getIdCidade());
 			$stmt->bindValue(':nome',$produtor->getNome());
 			$stmt->bindValue(':nomeSocial',$produtor->getNomeSocial());
@@ -201,7 +201,7 @@ class DaoProdutores
 			$stmt->bindValue(':descricao',$produtor->getDescricao());
 			$stmt->bindValue(':keywords',$produtor->getKeyWords());
 			$stmt->bindValue(':idProdutor',$produtor->getId());
-
+			
 			if($stmt->execute()){
 				
 				if($this->editaProdutorTipo($produtor->getId(),$produtor->getIdTipo())){
@@ -266,6 +266,56 @@ class DaoProdutores
 		}
 		
 	}
+	public function apagar($id)
+	{
+		try {
+			$query = "DELETE FROM `Produtores` WHERE `idProdutor`=:id;";
+			$stmt = $this->con->prepare($query);
+			
+			$stmt->bindValue(':id',$id);
+			
+			if($stmt->execute()){
+				
+				$data['success'] = true;
+				$data['data'] = "Apagado com sucesso.";
+				
+			}
+			else{
+				$data['success'] = false;
+				$data['data'] = $stmt->errorInfo();
+			}
+		} catch (Exception $e) {
+			
+			$data['success'] = false;
+			$data['data'] = 'Error: '.$e->getMessage();
+		}	
+		
+		//header("Content-Type: application/json; charset=UTF-8");
+		return json_encode($data);
+	}	
+	
+	
+	private function apagarProdutorTipo($id)
+	{
+		try {
+			$query = "DELETE FROM `ProdutorTipos` WHERE `idProdutor`=:id;";
+			$stmt = $this->con->prepare($query);
+			
+			$stmt->bindValue(':id',$id);
+			
+			if($stmt->execute()){
+				return true;
+			}
+			else{
+				return false;
+				
+			}
+		} catch (Exception $e) {
+			
+			return false;
+			
+		}	
+	}	
 	
 	public function setImgName($id,$imgName){
 		

@@ -4,7 +4,12 @@ var path = window.location.pathname;
 //Cria dinamicamente onde se deve fazer as requisiçoes dinamicas
 var urlRequisicao = window.location.origin + '/';
 
-$(document).ready(async function(){
+$(document).ready(() => {
+    loadSelects();
+});
+
+
+async function loadSelects(){
     await  $.ajax({
         url: urlRequisicao+'crudprodutores/getCidades', //o arquivo para o qual deseja fazer a requisição
         type: 'POST', //metodo de envio
@@ -47,4 +52,4 @@ $(document).ready(async function(){
             })
         }
     });  
-});
+}
