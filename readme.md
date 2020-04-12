@@ -42,6 +42,10 @@ Voê pode acessar todos os andamentos do projeto em: ([Projeto Mãos Dadas](http
   <tr>
     <td align="center"><a href="https://github.com/misaruto"><img src="https://avatars0.githubusercontent.com/u/40955371?v=4" width="100px;" alt=""/><br /><sub><b>Misael Guilhardes de Freitas</b></sub></a><br /><a href="https://github.com/01EmComp/ProjetoMaosDadas/commits?author=misaruto" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/felipecandian"><img src="https://avatars3.githubusercontent.com/u/34189423?v=4" width="100px;" alt=""/><br /><sub><b>Felipe Candian</b></sub></a><br /><a href="https://github.com/01EmComp/ProjetoMaosDadas/commits?author=felipecandian" title="Code">💻</a></td>
+	  
+<td align="center"><a href="https://github.com/wliberatoc"><img src="https://avatars3.githubusercontent.com/u/48737397?v=4" width="100px;" alt=""/><br /><sub><b>Willian Liberato</b></sub></a><br /><a href="https://github.com/01EmComp/ProjetoMaosDadas/commits?author=wliberatoc" title="Code">💻</a></td>
+
+<td align="center"><a href="https://github.com/tallesyago"><img src="https://avatars3.githubusercontent.com/u/62714078?v=4" width="100px;" alt=""/><br /><sub><b>Talles Yago</b></sub></a><br /><a href="https://github.com/01EmComp/ProjetoMaosDadas/commits?author=wliberatoc" title="Code">💻</a></td>
 
   </tr>
  
