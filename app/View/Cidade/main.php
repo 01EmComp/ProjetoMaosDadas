@@ -1,57 +1,51 @@
-<div class="city-container">
+<div class="container-fluid mt-4">
   <div class="row">
-    <div class="col-lg-3">
-    <div class="card" id="card-categoria" style="margin-bottom:10px;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-       data-target="#categorias"  aria-expanded="true" aria-label="Alterna navegação">
-        <h4  style="width: 100%; margin: auto; align-items: center;text-align: center;">Filtrar por categoria:</h4>
-        <span class="navbar-toggler-icon"></span>
-      <div class="card-head">
+    <div class="col-3">
+      <ol class="breadcrumb" id="nomeCidade">
+      </ol>
+    </div>
+    <div class="col-9">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div id="topo">
+        <ul class="list-group mt-2 mb-2 mr-2 ml-2" id="minhaLista">
+        </ul>
       </div>
-      </button>
-      <div class="card-body collapse show" id="categorias">
-        <div class="list-group">
-         <?=$this->getMenu()?>
+    </div>
+    <div class="col-sm-9 mx-auto">
+        <div class="lds-ring d-none" id="load">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      <span class="row" id="cards"></span>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">Descrição</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span id="conteudo">
+          </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- /.col-lg-3 -->
-  <div class="col-lg-9">
-    <div class="card">
-      <div class="card-head">
-        <h2 style="width: 100%; margin: 4px 22px; align-items: center;text-align: left;"> 
-        <?=$this->getNomeCidade()?>
-      </h2>
-    </div>
-    <div class="card-body">
-      <div class="row" id="produtoresContainer">
-        <?=$this->getProdutores()?>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-<!-- Modal Detalhes do produtor-->
-<div class="modal fade" id="modalProdutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalHead"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="modalBody">
-
-      </div>
-      <div class="modal-footer" id="modalFoot">
-      </div>
-    </div>
-  </div>
+  
+  <a href="#topo" type="button" class="btn btn-posicao btn-dark float-right mr-3"><i class="fas fa-chevron-circle-up"></i></a>
+  
+  <input type="hidden" name="idCidade" value="<?=$this->getIdCidade()?>" id="city"/>
 </div>

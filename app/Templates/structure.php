@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="<?=DIRPAGE.'vendor/twbs/bootstrap/dist/css/bootstrap.min.css'?>">
 	<!--Local css-->
 	<link rel="stylesheet" type="text/css" href="<?=DIRCSS?>styles.css">
+	<link rel="stylesheet" type="text/css" href="<?=DIRCSS?>main.css">
+	<link rel="stylesheet" type="text/css" href="<?=DIRCSS?>animate.css">
 	<!--Meta tag de recursividade para dispositivos moveis-->
 	<meta name="viewport" content="width=device-width">
 	<!--Script do JQUERY-->
@@ -28,16 +30,37 @@
 	</div>
 	<br>
 	
-	<div class="bg-light pb-5 footer">
-		<div class="container text-center">
-			<p class="text-muted mb-0">
-				Copyright &copy; Projeto Mãos Dadas 2020 - Desenvolvido por:
-			<p> 
-			<a href="emcomp.com.br" target="_blank">
-				<img style="width:150px; height:50px;" src="<?=DIRIMG?>logoEmcomp.png" alt="Logo Emcomp">
-			</a>
-		</div>
-	</div>
+    <footer class="mt-5 d-none"id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2 class="logo"><a href="http://emcomp.com.br"><img src="https://emcomp.com.br/wp-content/uploads/2019/11/Logo-Emcomp-branca.png" width="200" height=""/></a></h2>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Inicio</h5>
+                    <ul>
+                        <li><a href="viewListarCidades.php">Cidades</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdbhwCwCqRhKw8SoCnrUfhF4DUtEpThjgbNc7d6CCP0SOCvmQ/viewform">Cadastrar no sistema</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Sobre-nós</h5>
+                    <ul>
+                        <li><a href="">Informações do Projeto</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="https://www.facebook.com/EmComp/" ><i class="fab fa-facebook"></i></a>
+                        <a href="instagram.com/emcomp/" ><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2020 Copyright - EmComp</p>
+        </div>
+    </footer>
 </body>
 <!--Script do reCATPTCHA da google-->
 <script src='https://www.google.com/recaptcha/api.js'></script>
