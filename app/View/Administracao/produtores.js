@@ -55,7 +55,7 @@ $(document).ready(async () => {
             url: urlRequisicao + "crudprodutores/getProdutores/"+idCidade,
             type: "GET",
             success: (resposta) => {
-                //console.log(resposta);
+                console.log(resposta);
                 $('#IdProdutorEditar').html('');
                 $(resposta).each(i => {
                     // Cria um novo elemento
@@ -103,7 +103,7 @@ $(document).ready(async () => {
             success: (resposta) => {
                 //console.log(resposta);
                 if(resposta.success){
-                    loadSelects();
+                    //loadSelects();
                     $("#EditarCidade").attr("hidden",true);
                     $("#EditarCategoria").attr("hidden",true);
                     renderProdutorEditLayout(resposta.data);
@@ -200,22 +200,22 @@ $(document).ready(async () => {
 
 
 
-function renderProdutorEditLayout(produtor){
-    //console.log(produtor);
+async function renderProdutorEditLayout(produtor){
+    console.log(produtor);
     sessionStorage.setItem("produtor",produtor.idProdutor);
     idCidade = sessionStorage.getItem('idCidade');
-    $("#inputCidadeEditarProdutor>option[value="+idCidade+"]").attr("selected",true);
-    $("#inputCategoriaEditarProdutor>option[value="+produtor.idTipo+"]").attr("selected",true);
+    await $("#inputCidadeEditarProdutor>option[value="+idCidade+"]").attr("selected",true);
+    await $("#inputCategoriaEditarProdutor>option[value="+produtor.idTipo+"]").attr("selected",true);
     
-    $("#inputNomeEditarProdutor").val(produtor.nomeProdutor);
-    $("#inputNomeSocialEditarProdutor").val(produtor.nomeSocial);
-    $("#inputWhatsappEditarProdutor").val(produtor.whatsapp);
-    $("#inputEnderecoEditarProdutor").val(produtor.endereco);
-    $("#inputFormPagamentoEditarProdutor").val(produtor.formaPagamento);
-    $("#inputFormaEntregaEditarProdutor").val(produtor.formaEntrega);
-    $("#inputKeywordsEditarProdutor").val(produtor.keyWords);
-    $("#inputDescricaoEditarProdutor").val(produtor.descricao);
-    $("#imgProdutorEditar").attr('src',urlRequisicao+'public/img/produtores/'+produtor.img);
+    await $("#inputNomeEditarProdutor").val(produtor.nomeProdutor);
+    await  $("#inputNomeSocialEditarProdutor").val(produtor.nomeSocial);
+    await $("#inputWhatsappEditarProdutor").val(produtor.whatsapp);
+    await $("#inputEnderecoEditarProdutor").val(produtor.endereco);
+    await $("#inputFormPagamentoEditarProdutor").val(produtor.formaPagamento);
+    await $("#inputFormaEntregaEditarProdutor").val(produtor.formaEntrega);
+    await $("#inputKeywordsEditarProdutor").val(produtor.keyWords);
+    await $("#inputDescricaoEditarProdutor").val(produtor.descricao);
+    await $("#imgProdutorEditar").attr('src',urlRequisicao+'public/img/produtores/'+produtor.img);
     
     $("#modalEditaProdutor").modal('hide');
     $("#cardInicio").attr("hidden",true);

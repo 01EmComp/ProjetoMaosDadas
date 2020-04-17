@@ -9,7 +9,8 @@ class FiltroController{
     {
         $daoProdutores = new DaoProdutores();
         $produtores = $daoProdutores->selectProdutoresTipos($idCidade,$idTipo);
-
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
         echo $produtores;
     }
 
@@ -17,6 +18,8 @@ class FiltroController{
 
         $daoProdutores = new DaoProdutores();
         $produtores = $daoProdutores->selectProdutores($idCidade);
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
         echo $produtores;
         
     }

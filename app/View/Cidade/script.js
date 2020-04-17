@@ -6,9 +6,10 @@ var urlRequisicao = window.location.origin + '';
 
 var urlImagens = urlRequisicao+"/public/img/";
 
+var msg = 'Ol%C3%A1!%20%20Acessei%20seu%20contato%20atrav%C3%A9s%20do%20%22Projeto%20Rio%20Pomba%20e%20regi%C3%A3o%20de%20m%C3%A3os%20dadas%22.%20%20Pode%20me%20atender%3F';
 function buscaProdutor(id){
     $.ajax({
-        url: urlRequisicao + '/crudprodutores/selectProdutor/'+id,
+        url: urlRequisicao + '/api/selectProdutor/'+id,
         type: 'GET',
         success: (resposta) => {
             var produtor = resposta.data;
@@ -36,7 +37,7 @@ function buscaProdutor(id){
                 +'Whatsapp: '
                 +'<a href="https://api.whatsapp.com/send?phone='
                 +produtor.whatsapp
-                +'&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">'
+                +'&text='+msg+'" target="_blank">'
                 +produtor.whatsapp
                 +'</a><br>'
                 +'Forma(s) de pagamento: '
@@ -56,7 +57,7 @@ function buscaProdutor(id){
                 '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>'
                +'<a class="btn" style="width:50%" href="https://api.whatsapp.com/send?phone='
                +produtor.whatsapp
-               +'&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">'
+               +'&text='+msg+'" target="_blank">'
                   +'<img style="width:100%; height:100%" src="'+urlImagens+'wpp.png" alt="">'
                 +'</a>')
                 $("#modalProdutor").modal('toggle');
@@ -80,8 +81,8 @@ function buscaProdutor(id){
             $.ajax({
                 url: urlRequisicao + filtro + tipoCidade.cidade+"/"+tipoCidade.tipo,
                 success: (resposta)=>{
-                   // console.log(resposta);
-                    resposta = JSON.parse(resposta);
+                   //console.log(resposta);
+                    //resposta = JSON.parse(resposta);
                     if(resposta.success){
                         var produtores = resposta.data;
                         // console.log(resposta);
@@ -121,7 +122,7 @@ function buscaProdutor(id){
                 +'</div>'
                 +'<div class="card-body">'
                 +'<h5 class="card-title">'		
-                +produtores[i].nome
+                +produtores[i].nomeProdutor
                 +'</h5>'
                 +'<p>'
                 +produtorDescricao
@@ -129,7 +130,7 @@ function buscaProdutor(id){
                 +'</div>'
                 +'<a class="list-group-item" href="https://api.whatsapp.com/send?phone='
                 +produtores[i].whatsapp
-                +'&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">'
+                +'&text='+msg+'" target="_blank">'
                 +'<div class="card-footer">'
                 +'<img class="card-img-top" src="'+urlImagens+'wpp.png" alt="">'
                 +'</div>'

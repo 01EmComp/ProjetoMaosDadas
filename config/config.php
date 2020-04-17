@@ -13,8 +13,8 @@ else{
 }
 
 #chaves recaptcha emcomp
-define('PrivKey','6Le_VOUUAAAAAONPjXkSrJrWUY0Gpkd6o2TKPWTc');
-define('PubKey','6Le_VOUUAAAAAPhybnXynayfpSodILffMvdraUiR');
+define('PrivKey','6Le4s7QUAAAAAPbWsbGZVDieLzMi-fFdew7RYn0K');
+define('PubKey','6Le4s7QUAAAAAMJDrdkRXh9_BGrixbIIzcyfv-b8');
 
 
 #diretorios especificos

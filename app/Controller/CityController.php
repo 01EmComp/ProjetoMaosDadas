@@ -30,11 +30,13 @@ class CityController extends Render
 	public function select($city){
 		$_SESSION['idCidade'] = $city;		
 		$cidade = new DaoCidades;
-		$name = json_decode($cidade->getNome($city));
+		$name = json_decode($cidade->selectCidade($city));
 		return $name->data->nome;
 	}
 
 	public function getProdutores(){
+
+		$msg = 'Ol%C3%A1!%20%20Acessei%20seu%20contato%20atrav%C3%A9s%20do%20%22Projeto%20Rio%20Pomba%20e%20regi%C3%A3o%20de%20m%C3%A3os%20dadas%22.%20%20Pode%20me%20atender%3F';
 			$produtores = new DaoProdutores();
 			$produtores = json_decode($produtores->selectProdutores($this->idCidade));
 			if ($produtores->success) {
@@ -65,14 +67,14 @@ class CityController extends Render
 					</div>
 					<div class="card-body">
 					<h5 class="card-title">		
-					'.$value->nome.'
+					'.$value->nomeProdutor.'
 					</h5>
 					<p>
 					'.$descricao.'
 					</p>
 					</div>
 					<a class="list-group-item" href="https://api.whatsapp.com/send?phone='.$value->whatsapp.'
-					&text=Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">
+					&text='.$msg.'" target="_blank">
 					<div class="card-footer">
 					<img class="card-img-top" src="'.DIRIMG.'wpp.png" alt="">
 					</div>

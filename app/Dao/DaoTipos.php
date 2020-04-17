@@ -101,7 +101,7 @@ class DaoTipos {
 	}	
 	public function selectTiposCidade($idCidade){
 		try {
-			$query = "SELECT DISTINCT(idTipo) AS idTipo,`nome`, `descricao`, `img` FROM
+			$query = "SELECT DISTINCT(idTipo) AS idTipo,`nome`, `descricao` FROM
 			`VisaoFiltroCidadeTipos` WHERE idCidade = :idCidade";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':idCidade',$idCidade);
@@ -110,8 +110,8 @@ class DaoTipos {
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$tip = array("id" => $resultado['idTipo'],
 				"nome" => $resultado['nome'], 
-				"descricao" => $resultado['descricao'],
-				"img" => $resultado['img']);
+				"descricao" => $resultado['descricao']
+				);
 				array_push($tips, $tip);
 			}
 			

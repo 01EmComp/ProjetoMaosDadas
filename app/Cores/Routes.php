@@ -27,7 +27,9 @@ class Routes extends UrlTrait
 		"crudprodutores" => "CrudProdutoresController",
 		"crudcidades" => "CrudCidadesController",
 		"crudcategorias" => "CrudCategoriasController",
-		"filtro" => "FiltroController"
+		"filtro" => "FiltroController",
+		"contato" =>"ContatoController",
+		"api" => "ApiController"
 	);
 	$this->url = new UrlTrait();
 	$index = $this->url->traitUrl();

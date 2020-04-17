@@ -20,9 +20,10 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT  DISTINCT idProdutor,`idTipo`, `idCidade`, `img`, `nome`, 
-			`descricao`, `whatsapp` FROM VisãoGeralTiposProdutores 
-			WHERE idTipo = :tipo AND idCidade = :cidade";
+			$query = "SELECT `img`, `idProdutor`, `nomeProdutor`, `nomeSocial`, 
+			`whatsapp`, `endereco`, `descricao`, `formaPagamento`,`formaEntrega`, 
+			`keyWords`, `nomeCidade`, `idTipo` FROM `VisãoGeralTiposProdutores` 
+			WHERE idTipo = :tipo AND idCidade = :cidade ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':tipo',$tipo);
 			$stmt->bindValue(':cidade',$cidade);
@@ -30,15 +31,21 @@ class DaoProdutores
 			$produtores = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$produtor = array("idTipo" => $resultado['idTipo'],
-				"idProdutor" => $resultado['idProdutor'], 
-				"idCidade" => $resultado['idCidade'], 
-				"nome" => $resultado['nome'], 
+				"idProdutor" => $resultado['idProdutor'],
+				"nomeProdutor" => $resultado['nomeProdutor'], 
+				"nomeCidade" => $resultado['nomeCidade'], 
+				"endereco" => $resultado['endereco'], 
 				"whatsapp" => $resultado['whatsapp'],
 				"descricao" => $resultado['descricao'],
-				"img" => $resultado['img']);
+				"formaPagamento" => $resultado['formaPagamento'],
+				"formaEntrega" => $resultado['formaEntrega'],
+				"nomeSocial" => $resultado['nomeSocial'],
+				"keyWords" => $resultado['keyWords'],
+				"idTipo" => $resultado['idTipo'],
+				"img" => $resultado['img']
+			);
 				array_push($produtores, $produtor);
 			}
-			
 			$data['success'] = true;
 			$data['data'] = $produtores;
 			
@@ -48,7 +55,7 @@ class DaoProdutores
 			$data['data'] = 'Error: '.$e->getMessage();
 		}
 		//header("Content-Type: application/json; charset=UTF-8");
-		return json_encode($data);
+		return json_encode($data,JSON_PRETTY_PRINT);
 		
 	}
 	
@@ -56,21 +63,29 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT  DISTINCT idProdutor,`idTipo`, `idCidade`, `img`, `nome`, 
-			`descricao`, `whatsapp` FROM VisãoGeralTiposProdutores 
-			WHERE idCidade = :cidade";
+			$query = "SELECT  DISTINCT idProdutor,`nomeProdutor`, `nomeSocial`,
+			 `whatsapp`, `endereco`, `descricao`, `formaPagamento`, `formaEntrega`,
+			 `keyWords`, `nomeCidade`, `idTipo`, `idCidade`,`img` FROM VisãoGeralTiposProdutores 
+			WHERE idCidade = :cidade ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':cidade',$cidade);
 			$stmt->execute();
 			$produtores = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$produtor = array("idTipo" => $resultado['idTipo'],
-				"idProdutor" => $resultado['idProdutor'], 
-				"idCidade" => $resultado['idCidade'], 
-				"nome" => $resultado['nome'], 
+				"idProdutor" => $resultado['idProdutor'],
+				"nomeProdutor" => $resultado['nomeProdutor'], 
+				"nomeCidade" => $resultado['nomeCidade'], 
+				"endereco" => $resultado['endereco'], 
 				"whatsapp" => $resultado['whatsapp'],
 				"descricao" => $resultado['descricao'],
-				"img" => $resultado['img']);
+				"formaPagamento" => $resultado['formaPagamento'],
+				"formaEntrega" => $resultado['formaEntrega'],
+				"nomeSocial" => $resultado['nomeSocial'],
+				"keyWords" => $resultado['keyWords'],
+				"idTipo" => $resultado['idTipo'],
+				"img" => $resultado['img']
+			);
 				array_push($produtores, $produtor);
 			}
 			
@@ -87,11 +102,63 @@ class DaoProdutores
 		
 	}
 	
+	
+	
+	public function getProdutores()
+	{
+		
+		try {
+			$query = "SELECT * FROM VisaoGeralPodutorCidade ORDER BY nomeProdutor ASC";
+			$stmt = $this->con->prepare($query);
+			
+			if($stmt->execute()){
+
+				$produtores = array();
+
+				while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
+					$produtor = array(
+						"idProdutor" => $resultado['idProdutor'],
+						"idCidade" => $resultado['idCidade'],
+						"nomeProdutor" => $resultado['nomeProdutor'], 
+						"nomeCidade" => $resultado['nomeCidade'], 
+						"endereco" => $resultado['endereco'], 
+						"whatsapp" => $resultado['whatsapp'],
+						"descricao" => $resultado['descricao'],
+						"formaPagamento" => $resultado['formaPagamento'],
+						"formaEntrega" => $resultado['formaEntrega'],
+						"nomeSocial" => $resultado['nomeSocial'],
+						"keyWords" => $resultado['keyWords'],
+						"idTipo" => $resultado['idTipo'],
+						"img" => $resultado['img']
+					);
+
+					array_push($produtores,$produtor);
+				}
+			}
+			else{
+				$data['success'] = false;
+				$data['data']= 'Erro ao buscar comprador';
+				$data['msg'] = $stmt->errorinfo();
+			}
+			
+		} catch (Exception $e) {
+			
+			$data['success'] = false;
+			$data['data'] = 'Error: '.$e->getMessage();
+		}
+		//header("Content-Type: application/json; charset=UTF-8");
+		return json_encode($produtores, JSON_PRETTY_PRINT);
+		
+	}
+	
+	
+	
 	public function selectProdutor($idProdutor)
 	{
 		
 		try {
-			$query = "SELECT * FROM VisaoGeralPodutorCidade WHERE idProdutor = :produtor ";
+			$query = "SELECT * FROM VisãoGeralTiposProdutores WHERE 
+			idProdutor = :produtor ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			
 			$stmt->bindValue(':produtor',$idProdutor);
@@ -130,7 +197,7 @@ class DaoProdutores
 			$data['data'] = 'Error: '.$e->getMessage();
 		}
 		//header("Content-Type: application/json; charset=UTF-8");
-		return json_encode($data);
+		return json_encode($data, JSON_PRETTY_PRINT);
 		
 	}
 	
@@ -138,8 +205,9 @@ class DaoProdutores
 	public function cadastra(ModelProdutor $produtor){
 		try {
 			$query = "INSERT INTO `Produtores`(`idCidade`, `nome`, `nomeSocial`, `whatsapp`,
-			`endereco`, `formaPagamento`, `formaEntrega`, `descricao`,`img`,`keyWords`) 
-			VALUES (:idCidade, :nome, :nomeSocial, :whatsapp, :endereco, :pagamento, :entrega, :descricao, :img,:keywords)";
+			`endereco`, `formaPagamento`, `formaEntrega`, `descricao`,`keyWords`) 
+			VALUES (:idCidade, :nome, :nomeSocial, :whatsapp, :endereco, :pagamento, :entrega,
+			 :descricao,:keywords)";
 			$stmt = $this->con->prepare($query);
 			
 			$stmt->bindValue(':idCidade',$produtor->getIdCidade());
@@ -150,7 +218,6 @@ class DaoProdutores
 			$stmt->bindValue(':endereco',$produtor->getEndereco());
 			$stmt->bindValue(':entrega',$produtor->getFormaEntrega());
 			$stmt->bindValue(':descricao',$produtor->getDescricao());
-			$stmt->bindValue(':img','');
 			$stmt->bindValue(':keywords',$produtor->getKeyWords());
 			
 			if($stmt->execute()){
