@@ -2,9 +2,17 @@
 <html>
 <head>
 	<title><?=NAME." - ".$this->getTitle()?></title>
-	<meta charset="utf-8">
-	<!--Favicon.ico-->
-	<link rel="shortcut icon" href="<?=DIRIMG?>favicon.ico" style="width:100%;heght:100%;"/>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.jshttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/regular.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/solid.min.js" crossorigin="anonymous"></script>
+
+    
+
+	<!--Icone-->
+    <link rel="icon" href="<?=DIRIMG?>/favicon.png">
 	<!--Bootstrap-->
 	<link rel="stylesheet" type="text/css" href="<?=DIRPAGE.'vendor/twbs/bootstrap/dist/css/bootstrap.min.css'?>">
 	<!--Local css-->

@@ -4,7 +4,10 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
 }
-
+.card-img-top{
+  cursor: pointer;
+  filter: brightness(60%);
+}
 .card-tamanho {
     height: 400px;
     width: 100%;
@@ -30,6 +33,7 @@
   transform: scale(1.5);
 }
 h5.card-title{
+    z-index: 1001;
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
 }

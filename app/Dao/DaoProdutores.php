@@ -108,7 +108,7 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT * FROM VisaoGeralPodutorCidade ORDER BY nomeProdutor ASC";
+			$query = "SELECT * FROM VisãoGeralTiposProdutores ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			
 			if($stmt->execute()){

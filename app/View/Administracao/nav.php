@@ -49,6 +49,9 @@
         <li class="nav-item">
           <a class="nav-link" href="<?=DIRPAGE?>about">Sobre</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=DIRPAGE?>/session/logout">Sair</a>
+        </li>
       </ul>
     </div>
   </div>
