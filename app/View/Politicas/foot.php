@@ -1,0 +1,1 @@
+<script src="<?=DIRPAGE?>app/View/Politicas/script.js"></script>

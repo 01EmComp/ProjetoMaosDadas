@@ -14,65 +14,68 @@ class DaoTipos {
 
 
 	public function cadastrar(ModelCategorias $Tipo)
-		{
-			try {
-				$query = "INSERT INTO `Tipos`(`nome`,`descricao`,`img`) 
-				VALUES(:nome, :descricao,:img);";
-				$stmt = $this->con->prepare($query);
-				$stmt->bindValue(':nome',$Tipo->getNome());
-				$stmt->bindValue(':descricao',$Tipo->getDescricao());
-				$stmt->bindValue(':img','');
-				
-				if($stmt->execute()){
-					$stmt = $this->con->prepare("SELECT MAX(idTipo) AS id FROM `Tipos`");
-					$stmt->execute();
-					$resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
-					
-					$Tipo = array("idTipo" => $resultado['id']);
-					
-					$data['success'] = true;
-					$data['data'] = $Tipo;
-				}
-				else{
-					$data['success'] = false;
-					$data['data'] = $stmt->errorInfo();
-				}
-			} catch (Exception $e) {
-				
-				$data['success'] = false;
-				$data['data'] = 'Error: '.$e->getMessage();
-			}	
+	{
+		try {
+			$query = "INSERT INTO `Tipos`(`nome`,`descricao`,`img`,`icon`) 
+			VALUES(:nome, :descricao,:img,:icon);";
+			$stmt = $this->con->prepare($query);
+			$stmt->bindValue(':nome',$Tipo->getNome());
+			$stmt->bindValue(':descricao',$Tipo->getDescricao());
+			$stmt->bindValue(':img','');
+			$stmt->bindValue(':icon',$Tipo->getIcon());
 			
+			if($stmt->execute()){
+				$stmt = $this->con->prepare("SELECT MAX(idTipo) AS id FROM `Tipos`");
+				$stmt->execute();
+				$resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+				
+				$Tipo = array("idTipo" => $resultado['id']);
+				
+				$data['success'] = true;
+				$data['data'] = $Tipo;
+			}
+			else{
+				$data['success'] = false;
+				$data['data'] = $stmt->errorInfo();
+			}
+		} catch (Exception $e) {
+			
+			$data['success'] = false;
+			$data['data'] = 'Error: '.$e->getMessage();
+		}	
+		
 			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
-		}
+		return json_encode($data);
+	}
 
-		public function editar(ModelCategorias $Tipo)
-		{
-			try {
-				$query = "UPDATE `Tipos` SET `nome`=:nome, `descricao`=:descricao WHERE `idTipo`=:id;";
-				$stmt = $this->con->prepare($query);
-				$stmt->bindValue(':nome',$Tipo->getNome());
-				$stmt->bindValue(':descricao',$Tipo->getDescricao());
-				$stmt->bindValue(':id',$Tipo->getId());
-				
-				if($stmt->execute()){
-					$data['success'] = true;
-					$data['data'] = "Atualizado com sucesso.";
-				}
-				else{
-					$data['success'] = false;
-					$data['data'] = $stmt->errorInfo();
-				}
-			} catch (Exception $e) {
-				
+	public function editar(ModelCategorias $Tipo)
+	{
+		try {
+			$query = "UPDATE `Tipos` SET `nome`=:nome, `descricao`=:descricao,
+			`icon`=:icon WHERE `idTipo`=:id;";
+			$stmt = $this->con->prepare($query);
+			$stmt->bindValue(':nome',$Tipo->getNome());
+			$stmt->bindValue(':descricao',$Tipo->getDescricao());
+			$stmt->bindValue(':id',$Tipo->getId());
+			$stmt->bindValue(':icon',$Tipo->getIcon());
+
+			if($stmt->execute()){
+				$data['success'] = true;
+				$data['data'] = "Atualizado com sucesso.";
+			}
+			else{
 				$data['success'] = false;
-				$data['data'] = 'Error: '.$e->getMessage();
-			}	
+				$data['data'] = $stmt->errorInfo();
+			}
+		} catch (Exception $e) {
 			
+			$data['success'] = false;
+			$data['data'] = 'Error: '.$e->getMessage();
+		}	
+		
 			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
-		}
+		return json_encode($data);
+	}
 
 	public function apagar($id)
 	{
@@ -101,7 +104,7 @@ class DaoTipos {
 	}	
 	public function selectTiposCidade($idCidade){
 		try {
-			$query = "SELECT DISTINCT(idTipo) AS idTipo,`nome`, `descricao` FROM
+			$query = "SELECT DISTINCT(idTipo) AS idTipo,`nome`, `descricao`,`icon` FROM
 			`VisaoFiltroCidadeTipos` WHERE idCidade = :idCidade";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':idCidade',$idCidade);
@@ -109,8 +112,9 @@ class DaoTipos {
 			$tips = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$tip = array("id" => $resultado['idTipo'],
-				"nome" => $resultado['nome'], 
-				"descricao" => $resultado['descricao']
+					"nome" => $resultado['nome'], 
+					"descricao" => $resultado['descricao'],
+					"icon" => $resultado['icon']
 				);
 				array_push($tips, $tip);
 			}
@@ -136,7 +140,9 @@ class DaoTipos {
 			$tips = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$tip = array("idTipo" => $resultado['idTipo'],
-				"nome" => $resultado['nome'], );
+					"nome" => $resultado['nome'],
+					"icon" => $resultado['icon']
+				);
 				array_push($tips, $tip);
 			}
 			
@@ -165,7 +171,9 @@ class DaoTipos {
 				$tip = array(
 					"nome" => $resultado['nome'],
 					"descricao" => $resultado['descricao'],
-					"img" => $resultado['img']
+					"img" => $resultado['img'],
+					"icon" => $resultado['icon']
+					
 				);
 			}
 			
@@ -182,7 +190,7 @@ class DaoTipos {
 	}
 
 	public function setImgName($id,$imgName){
-			
+		
 		try {
 			$query = "UPDATE `Tipos` SET `img` = :img WHERE idTipo = :id;";
 			$stmt = $this->con->prepare($query);

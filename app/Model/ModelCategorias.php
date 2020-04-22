@@ -11,6 +11,8 @@ class ModelCategorias
 	private $nome;
 	private $descricao;
 	private $img;
+	private $icon;
+
 	
 	function __construct()
 	{
@@ -18,6 +20,7 @@ class ModelCategorias
 		$this->nome ="";
 		$this->descricao ="";
 		$this->img = "";
+		$this->icon = "";
 	}
 	
 	
@@ -51,6 +54,13 @@ class ModelCategorias
 	
 	public function setImg($img){
 		$this->img = $img;
+	}
+	public function getIcon(){
+		return $this->icon;
+	}
+	
+	public function setIcon($icon){
+		$this->icon = $icon;
 	}
 }
 ?>

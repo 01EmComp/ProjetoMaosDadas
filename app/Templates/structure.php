@@ -4,7 +4,6 @@
 	<title><?=NAME." - ".$this->getTitle()?></title>
     <meta charset="utf-8">
     
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.jshttps://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/regular.min.js" crossorigin="anonymous"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/solid.min.js" crossorigin="anonymous"></script>
@@ -20,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="<?=DIRCSS?>main.css">
 	<link rel="stylesheet" type="text/css" href="<?=DIRCSS?>animate.css">
 	<!--Meta tag de recursividade para dispositivos moveis-->
-	<meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!--Script do JQUERY-->
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<?=$this->addHead()?>
@@ -38,17 +37,17 @@
 	</div>
 	<br>
 	
-    <footer class="mt-5 d-none"id="myFooter">
+    <footer class="mt-5 d-none" id="myFooter">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h2 class="logo"><a href="http://emcomp.com.br"><img src="https://emcomp.com.br/wp-content/uploads/2019/11/Logo-Emcomp-branca.png" width="200" height=""/></a></h2>
+                    <h2 class="logo"><a href="http://emcomp.com.br" target="_BLANK"><img src="https://emcomp.com.br/wp-content/uploads/2019/11/Logo-Emcomp-branca.png" width="200" height=""/></a></h2>
                 </div>
                 <div class="col-sm-3">
                     <h5>Inicio</h5>
                     <ul>
-                        <li><a href="viewListarCidades.php">Cidades</a></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdbhwCwCqRhKw8SoCnrUfhF4DUtEpThjgbNc7d6CCP0SOCvmQ/viewform">Cadastrar no sistema</a></li>
+                        <li><a href="<?=DIRPAGE?>">Cidades</a></li>
+                        <li><a target="_BLANK" href="https://docs.google.com/forms/d/e/1FAIpQLSdbhwCwCqRhKw8SoCnrUfhF4DUtEpThjgbNc7d6CCP0SOCvmQ/viewform">Cadastrar no sistema</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
@@ -59,8 +58,8 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="social-networks">
-                        <a href="https://www.facebook.com/EmComp/" ><i class="fab fa-facebook"></i></a>
-                        <a href="instagram.com/emcomp/" ><i class="fab fa-instagram"></i></a>
+                        <a target="_BLANK" href="https://www.facebook.com/EmComp/" ><i class="fab fa-facebook"></i></a>
+                        <a target="_BLANK" href="instagram.com/emcomp/" ><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>

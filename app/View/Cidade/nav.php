@@ -6,29 +6,30 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?=DIRPAGE?>"><h5>Inicio</h5><span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><h5>Sobre</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?=DIRPAGE?>/contatos"><h5>Contato</h5></a>
-                </li>
-            </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=DIRPAGE?>"><h5><i class="fas fa-home"></i> Início</h5><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><h5><i class="fas fa-info"></i> Sobre</h5></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=DIRPAGE?>contato"><h5><i class="fas fa-envelope"></i> Contato</h5></a>
+                    </li>
+                </ul>
                 <div class="dropdown">
                     <button class="btn btn-dark dropdown-toggle btn-lg mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Cidade
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Alguma ação</a>
-                        <a class="dropdown-item" href="#">Outra ação</a>
-                        <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="listarCidade">
+                        
                     </div>
                 </div>
                 <form class="form-inline my-2 my-lg-0">
-                    <a  href="https://docs.google.com/forms/d/e/1FAIpQLSdbhwCwCqRhKw8SoCnrUfhF4DUtEpThjgbNc7d6CCP0SOCvmQ/viewform "class="btn btn-outline-light my-2 my-sm-0 btn-lg " type="submit">Cadastrar no sistema</a>
+                    <a  href="https://docs.google.com/forms/d/e/1FAIpQLSdbhwCwCqRhKw8SoCnrUfhF4DUtEpThjgbNc7d6CCP0SOCvmQ/viewform "class="btn btn-outline-light my-2 my-sm-0 btn-lg " type="submit">
+                    <i class="fas fa-user">
+                    </i> Cadastro de Fornecedor
+                    </a>
                 </form>
             </div>
         </nav>

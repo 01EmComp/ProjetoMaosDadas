@@ -14,7 +14,12 @@ class CityController extends Render
 		session_start();
 		
 		$p = new Params();
-		$this->idCidade = $p->getParam()[0];
+		if(isset($p->getParam()[0])&&(is_numeric($p->getParam()[0]))){
+			$this->idCidade = $p->getParam()[0];
+		}
+		else{
+			header('location:'.DIRPAGE);
+		}
 		$this->setTitle("Cidades"); 
 		$this->setDescritpion("Pagina cidades");
 		$this->setKeywords("Cidades");

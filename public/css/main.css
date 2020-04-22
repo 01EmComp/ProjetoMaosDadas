@@ -4,14 +4,19 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
 }
-.card-img-top{
-  cursor: pointer;
-  filter: brightness(60%);
+
+body{
+    background-color: #f5f5f5;
 }
 .card-tamanho {
     height: 400px;
     width: 100%;
     border-radius: 20px !important;    
+}
+.card-tamanho-cont {
+    height: 450px;
+    width: 100%;
+    border-radius: 20px !important;      
 }
 .card-img-tamanho{
     height: 255px;
@@ -33,7 +38,6 @@
   transform: scale(1.5);
 }
 h5.card-title{
-    z-index: 1001;
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
 }
@@ -178,7 +182,7 @@ h1.nomecidade{
 }
 
 #myFooter .row {
-    margin-bottom: 60px;
+    margin-bottom: 10px;
 }
 
 #myFooter .navbar-brand {
@@ -289,4 +293,15 @@ body{
 #myFooter{
    flex: 0 0 auto;
    -webkit-flex: 0 0 auto;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  background-color: #f5f5f5;
+}
+
+a.dropdown-item:active {
+    background-color: #28a745;
+    text-decoration: none;
+    -webkit-text-decoration-skip: objects;
 }

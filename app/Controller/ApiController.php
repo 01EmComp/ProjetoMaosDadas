@@ -40,9 +40,40 @@ class ApiController{
         $result = json_decode($daoTipos->getTipos());
         $tipos = array();
         foreach ($result->data as $key => $value) {
+            if($value->icon == null){
+                $icon = "";
+            }
+            else{
+                $icon = $value->icon;
+            }
             $tipo = array(
                 "idTipo" => $value->idTipo,
-                "nome" => $value->nome);
+                "nome" => $value->nome,
+                "icon" => $icon
+            );
+            array_push($tipos,$tipo);                
+        }
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($tipos, JSON_PRETTY_PRINT);
+    }
+      public function getTiposCidade($idCidade){
+        $daoTipos = new DaoTipos();
+        $result = json_decode($daoTipos->selectTiposCidade($idCidade));
+        $tipos = array();
+        foreach ($result->data as $key => $value) {
+            if($value->icon == null){
+                $icon = "";
+            }
+            else{
+                $icon = $value->icon;
+            }
+            $tipo = array(
+                "idTipo" => $value->id,
+                "nome" => $value->nome,
+                "icon" => $icon
+            );
             array_push($tipos,$tipo);                
         }
 
@@ -70,6 +101,16 @@ class ApiController{
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
         echo $produtor;
+    }   
+
+    public function notificacoes(){
+       
+        $notify = array(
+                    );
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($notify);
     }   
 
 }

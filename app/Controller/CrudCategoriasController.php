@@ -17,10 +17,11 @@ class CrudCategoriasController {
     
     public function cadastrar()
     {
-        if((isset($_POST['nome']))&&(isset($_POST['keywords']))){
+        if((isset($_POST['nome']))&&(isset($_POST['keywords']))&&(isset($_POST['icon']))){
             $categoria = new ModelCategorias();
             $categoria->setNome($_POST['nome']);
             $categoria->setDescricao($_POST['keywords']);
+            $categoria->setIcon($_POST['icon']);
             
             $DaoTipos = new DaoTipos();
             $result = json_decode($DaoTipos->cadastrar($categoria));
@@ -48,11 +49,11 @@ class CrudCategoriasController {
     
     public function editar($idTipo)
     {
-        if((isset($_POST['nome']))&&(isset($_POST['keywords']))){
+        if((isset($_POST['nome']))&&(isset($_POST['keywords']))&&(isset($_POST['icon']))){
             $categoria = new ModelCategorias();
-            $categoria->setId($idTipo);
             $categoria->setNome($_POST['nome']);
             $categoria->setDescricao($_POST['keywords']);
+            $categoria->setIcon($_POST['icon']);
             
             $DaoTipos = new DaoTipos();
             $result = json_decode($DaoTipos->editar($categoria));
