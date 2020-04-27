@@ -155,6 +155,7 @@ function renderCategoriaEditLayout(categoria){
     $("#inputNomeEditarCategoria").val(categoria.nome);
     $("#inputKeywordsEditarCategoria").val(categoria.descricao);
     $("#imgEditarCategoria").attr("src",urlRequisicao+'public/img/produtores/'+categoria.img);
+    $("#inputIconEditarCategoria").val(categoria.icon);
     
     $("#modalEditaCategoria").modal('hide');
     $("#cardInicio").attr("hidden",true);

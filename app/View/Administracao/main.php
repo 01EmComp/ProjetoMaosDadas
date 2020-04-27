@@ -96,7 +96,7 @@
         </div>
         <div class="modal-body">
           <form class="form-group" id="formCadastroProdutores" enctype="multipart / form-data">
-            
+
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputNomeCadastrarProdutor">Nome</label>
@@ -181,6 +181,9 @@
         <div class="modal-body">
           <form class="form-group row" id="formCadastroCategorias">
             <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+            <br>
+            <br>
+            <input type="text" name="icon" class="form-control" placeholder="Icone" required>
             <br>
             <br>
             <textarea name="keywords" class="form-control" placeholder="Quais categorias vende"></textarea>
@@ -285,7 +288,7 @@
   </div>
   
   
-<!--Sesciona produtor para apgar-->  
+  <!--Sesciona produtor para apgar-->  
   <div class="modal fade" id="modalApagaProdutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -508,6 +511,9 @@
       <p class="text-center">Editar Categoria</p>
       <input id="inputNomeEditarCategoria" name="nome" type="text" class="form-control" placeholder="Nome" required>
       <br>
+      <input id="inputIconEditarCategoria" type="text" name="icon" class="form-control" placeholder="Icon" required>
+      <br>
+
       
       <input id="inputKeywordsEditarCategoria" name="keywords" type="text" class="form-control" placeholder="Descrição" required>
       <br>

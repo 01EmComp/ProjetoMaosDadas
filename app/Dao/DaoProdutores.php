@@ -22,7 +22,7 @@ class DaoProdutores
 		try {
 			$query = "SELECT `img`, `idProdutor`, `nomeProdutor`, `nomeSocial`, 
 			`whatsapp`, `endereco`, `descricao`, `formaPagamento`,`formaEntrega`, 
-			`keyWords`, `nomeCidade`, `idTipo` FROM `VisãoGeralTiposProdutores` 
+			`keyWords`, `nomeCidade`, `idTipo`,`nomeTipo`,`icon` FROM `VisaoGeralTiposProdutores` 
 			WHERE idTipo = :tipo AND idCidade = :cidade ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':tipo',$tipo);
@@ -42,6 +42,8 @@ class DaoProdutores
 				"nomeSocial" => $resultado['nomeSocial'],
 				"keyWords" => $resultado['keyWords'],
 				"idTipo" => $resultado['idTipo'],
+				"nomeTipo" => $resultado['nomeTipo'],
+				"icon" => $resultado['icon'],
 				"img" => $resultado['img']
 			);
 				array_push($produtores, $produtor);
@@ -65,7 +67,7 @@ class DaoProdutores
 		try {
 			$query = "SELECT  DISTINCT idProdutor,`nomeProdutor`, `nomeSocial`,
 			 `whatsapp`, `endereco`, `descricao`, `formaPagamento`, `formaEntrega`,
-			 `keyWords`, `nomeCidade`, `idTipo`, `idCidade`,`img` FROM VisãoGeralTiposProdutores 
+			 `keyWords`, `nomeCidade`, `idTipo`, `idCidade`,`img`,`nomeTipo`,`icon` FROM `VisaoGeralTiposProdutores`res 
 			WHERE idCidade = :cidade ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':cidade',$cidade);
@@ -84,6 +86,8 @@ class DaoProdutores
 				"nomeSocial" => $resultado['nomeSocial'],
 				"keyWords" => $resultado['keyWords'],
 				"idTipo" => $resultado['idTipo'],
+				"nomeTipo" => $resultado['nomeTipo'],
+				"icon" => $resultado['icon'],
 				"img" => $resultado['img']
 			);
 				array_push($produtores, $produtor);
@@ -108,7 +112,7 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT * FROM VisaoGeralPodutorCidade ORDER BY nomeProdutor ASC";
+			$query = "SELECT * FROM VisaoGeralTiposProdutores ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			
 			if($stmt->execute()){
@@ -129,6 +133,8 @@ class DaoProdutores
 						"nomeSocial" => $resultado['nomeSocial'],
 						"keyWords" => $resultado['keyWords'],
 						"idTipo" => $resultado['idTipo'],
+						"nomeTipo" => $resultado['nomeTipo'],
+						"icon" => $resultado['icon'],
 						"img" => $resultado['img']
 					);
 
@@ -157,7 +163,7 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT * FROM VisãoGeralTiposProdutores WHERE 
+			$query = "SELECT * FROM VisaoGeralTiposProdutores WHERE 
 			idProdutor = :produtor ORDER BY nomeProdutor ASC";
 			$stmt = $this->con->prepare($query);
 			

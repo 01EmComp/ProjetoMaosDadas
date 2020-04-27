@@ -1,9 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-success fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="<?=DIRPAGE?>administracao">Projeto Mãos Dadas <span id="name">Administração</span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <a class="navbar-brand" href="<?=DIRPAGE?>"><img src="<?=DIRIMG?>Logo-projeto.png" width="150" height="50"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
@@ -43,13 +45,17 @@
       </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=DIRPAGE?>">
-            Inicio
+            Início
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=DIRPAGE?>about">Sobre</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=DIRPAGE?>/session/logout">Sair</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+</header>
