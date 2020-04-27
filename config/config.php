@@ -12,7 +12,7 @@ else{
 	define('DIREQ', "{$_SERVER['DOCUMENT_ROOT']}/{$pastaInterna}");
 }
 
-#chaves recaptcha Keys
+#chaves recaptcha 
 define('PrivKey','');
 define('PubKey','');
 
