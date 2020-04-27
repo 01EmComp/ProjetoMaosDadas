@@ -71,6 +71,7 @@ $(document).ready(function() {
                     },
                     success: function(result, status, xhr) {
                         if(result.success){
+                            scrollTo(window,0);
                             renderCardsProdutores(result.data,idCidade);
                         }else{
                             $("#load").addClass('d-none');
@@ -119,9 +120,7 @@ $(document).ready(function() {
                 },
                 success: function(result, status, xhr) {
                     if (result.success) {
-                        $("#conteudo").removeClass('d-none');
-                        $("#nomeTitulo").html(result.data.nomeProdutor);
-                        $("#conteudo").html('<div class="row"> <div class="col-1"> <i class="fas fa-user-circle"></i> </div><div class="col-10"> <p>' + result.data.nomeSocial + '</p></div></div><div class="row"> <div class="col-1"> <i class="fas fa-info-circle"></i> </div><div class="col-10"> <p>' + result.data.descricao + '</p></div></div><div class="row"><div class="col-1"><i class="fas fa-hand-holding-usd"></i> </div><div class="col-10"> <p>' + result.data.formaPagamento + '</p></div></div><div class="row"> <div class="col-1"> <i class="fas fa-truck"></i> </div><div class="col-10"> <p>' + result.data.formaEntrega + '</p></div></div>');
+                        renderModalProdutores(result);
                     }
                     console.log(result);
                 },
@@ -149,12 +148,32 @@ $(document).ready(function() {
                 },
                 success: function(result, status, xhr) {
                     if (result.success) {
-                        $("#conteudo").removeClass('d-none');
-                        $("#nomeTitulo").html(result.data.nomeProdutor);
-                        $("#conteudo").html('<div class="row"> <div class="col-1"> <i class="fas fa-user-circle"></i> </div><div class="col-10"> <p>' + result.data.nomeSocial + '</p></div></div><div class="row"> <div class="col-1"> <i class="fas fa-info-circle"></i> </div><div class="col-10"> <p>' + result.data.descricao + '</p></div></div><div class="row"><div class="col-1"><i class="fas fa-hand-holding-usd"></i> </div><div class="col-10"> <p>' + result.data.formaPagamento + '</p></div></div><div class="row"> <div class="col-1"> <i class="fas fa-truck"></i> </div><div class="col-10"> <p>' + result.data.formaEntrega + '</p></div></div>');
+                        renderModalProdutores(result);
                         $("#exampleModalCenter").modal('show');
+                        }
+                        ///console.log(result);
+                    },
+                    error: function(xhr, status, errorMessage) {
+                        console.log("DEU RUIM");
+                    },
+                    complete: function(data) {
+                        $("#loader").hide();
                     }
-                    ///console.log(result);
+                });
+                
+            });
+            
+            $.ajax({
+                method: "GET",
+                url: "http://projetomaosdadas.emcomp.com.br/api/getcidades",
+                dataType: "json",
+                beforeSend: function() {
+                    $("#loader").show();
+                },
+                success: function(result, status, xhr) {
+                    $.each(result, function (index, value) {
+                        $("#listarCidade").append('<a class="dropdown-item lista-cidades" href="#" id="'+result[index].idCidade+'">'+result[index].nome+'</a>');
+                    });
                 },
                 error: function(xhr, status, errorMessage) {
                     console.log("DEU RUIM");
@@ -164,97 +183,122 @@ $(document).ready(function() {
                 }
             });
             
+            
+            
+            $("body").on("click", ".lista-cidades", function() {
+                $("#cards").empty();
+                var idTipo = 0;
+                var idCidade = $(this).attr("id");
+                listarProdutores(idCidade, idTipo);
+                
+            });
+            
         });
         
-        $.ajax({
-            method: "GET",
-            url: "http://projetomaosdadas.emcomp.com.br/api/getcidades",
-            dataType: "json",
-            beforeSend: function() {
-                $("#loader").show();
-            },
-            success: function(result, status, xhr) {
-                $.each(result, function (index, value) {
-                    $("#listarCidade").append('<a class="dropdown-item lista-cidades" href="#" id="'+result[index].idCidade+'">'+result[index].nome+'</a>');
+        
+        function renderCardsProdutores(result){
+            
+            $.each(result, function(index, value) {
+                $("#load").addClass('d-none');
+                $("#nomeCidade").html('<li class="breadcrumb-item"><a href="'+urlRequisicao+'">Cidade</a></li><li class="breadcrumb-item active" aria-current="page">'+value.nomeCidade+'</li>');
+                
+                $("#cards").append(
+                    '<div class="col-sm-4" >'
+                    +'<div class="card card-tamanho animated fadeIn slow border-0 shadow-lg bg-white mt-2 mb-2 mr-2">'
+                    +'<div class="img-hover-zoom"> '
+                    +'<img data="'+value.idProdutor+'" class="card-img-top card-img-tamanho produtores" src="'+urlRequisicao+'public/img/produtores/supermercado.png" alt="Card image cap" id="imagens' + index + '">'
+                    +'</div>'
+                    +'<div class="card-body d-none d-flex flex-column" id="cardb' + index + '"> '
+                    +'<div class="row"> '
+                    +'<div class="col-7"> '
+                    +'<h6 class="card-subtitle mb-2 text-muted" id="categoria' + index + '"></h6> '
+                    +'</div>'
+                    +'<div class="col-5"> '
+                    +'<h6 class="card-subtitle mb-2 text-muted" id="localizacao">'
+                    +'<i class="fas fa-map-marker-alt"></i> '
+                    + value.nomeCidade
+                    +'</h6> '
+                    +'</div>'
+                    +'</div>'
+                    +'<h5 class="card-title" id="nome">' 
+                    + value.nomeProdutor 
+                    + '</h5>'
+                    +'<div class="mt-auto">'
+                    +'<a target="_BLANK" href="#" class="btn btn-success" id="link' + index + '">'
+                    +'<i class="fab fa-whatsapp"></i> WhastApp'
+                    +'</a> '
+                    +'<button type="button" class="btn btn-dark teste" data-toggle="modal" data-target="#exampleModalCenter" id="info' + index + '" idProdutor="' + value.idProdutor + '">'
+                    +'<i class="fas fa-info"></i> Ler Mais'
+                    +'</button>'
+                    +'</div>'
+                    +'</div>'
+                    +'</div>'
+                    +'</div>'
+                    );
+                    
+                    $("#cardb" + index).removeClass('d-none');
+                    
+                    //$("#info"+index).attr("idProdutor",result[index].idProdutor);
+                    if (value.img) {
+                        var urlimagem = "http://projetomaosdadas.emcomp.com.br/public/img/produtores/";
+                        $("#imagens" + index).attr("src", urlimagem + value.img);
+                    }
+                    var url = "https://api.whatsapp.com/send?phone=";
+                    var mensagem = '&text=Olá! Acessei seu contato através do "Projeto Rio Pomba e região de mãos dadas".  Pode me atender?';
+                    var linkCompleto = url + value.whatsapp + mensagem;
+                    $("#link" + index).attr("href", linkCompleto);
+                    
+                    
+                    $("#categoria" + index).append('<i class="fas fa-'+value.icon+'"></i> '+value.nomeTipo);
+                    
+                    
                 });
-            },
-            error: function(xhr, status, errorMessage) {
-                console.log("DEU RUIM");
-            },
-            complete: function(data) {
-                $("#loader").hide();
+                
             }
-        });
-        
-        
-        
-        $("body").on("click", ".lista-cidades", function() {
-            $("#cards").empty();
-            var idTipo = 0;
-            var idCidade = $(this).attr("id");
-            listarProdutores(idCidade, idTipo);
-            
-        });
-        
-    });
-    
-    
-    function renderCardsProdutores(result){
-        
-        $.each(result, function(index, value) {
-            $("#load").addClass('d-none');
-            $("#nomeCidade").html('<li class="breadcrumb-item"><a href="'+urlRequisicao+'">Cidade</a></li><li class="breadcrumb-item active" aria-current="page">'+value.nomeCidade+'</li>');
-            
-            $("#cards").append(
-                '<div class="col-sm-4" >'
-                +'<div class="card card-tamanho animated fadeIn slow border-0 shadow-lg bg-white mt-2 mb-2 mr-2">'
-                +'<div class="img-hover-zoom"> '
-                +'<img data="'+value.idProdutor+'" class="card-img-top card-img-tamanho produtores" src="'+urlRequisicao+'public/img/produtores/supermercado.png" alt="Card image cap" id="imagens' + index + '">'
+
+function renderModalProdutores(result){
+    $("#conteudo").removeClass('d-none');
+    $("#nomeTitulo").html(result.data.nomeProdutor);
+    $("#conteudo").html(
+            '<div class="row"> '
+                +'<div class="col-1"> '
+                 +'<i class="fas fa-user-circle"></i> '
                 +'</div>'
-                +'<div class="card-body d-none d-flex flex-column" id="cardb' + index + '"> '
-                +'<div class="row"> '
-                +'<div class="col-7"> '
-                +'<h6 class="card-subtitle mb-2 text-muted" id="categoria' + index + '"></h6> '
+                +'<div class="col-10">'
+                    +' <p>' + result.data.nomeSocial + '</p>'
                 +'</div>'
-                +'<div class="col-5"> '
-                +'<h6 class="card-subtitle mb-2 text-muted" id="localizacao">'
-                +'<i class="fas fa-map-marker-alt"></i> '
-                + value.nomeCidade
-                +'</h6> '
+            +'</div>'
+            +'<div class="row"> '
+                +'<div class="col-1"> '
+                    +'<i class="fas fa-info-circle"></i> '
+                 +'</div>'
+                +'<div class="col-10"> '
+                    +'<p>' + result.data.descricao + '</p>'
                 +'</div>'
+            +'</div>'
+            +'<div class="row">'
+                +'<div class="col-1">'
+                    +'<i class="fas fa-hand-holding-usd"></i> '
                 +'</div>'
-                +'<h5 class="card-title" id="nome">' 
-                + value.nomeProdutor 
-                + '</h5>'
-                +'<div class="mt-auto">'
-                +'<a target="_BLANK" href="#" class="btn btn-success" id="link' + index + '">'
-                +'<i class="fab fa-whatsapp"></i> WhastApp'
-                +'</a> '
-                +'<button type="button" class="btn btn-dark teste" data-toggle="modal" data-target="#exampleModalCenter" id="info' + index + '" idProdutor="' + value.idProdutor + '">'
-                +'<i class="fas fa-info"></i> Ler Mais'
-                +'</button>'
+                +'<div class="col-10"> '
+                +'<p>' + result.data.formaPagamento + '</p>'
                 +'</div>'
+            +'</div>'
+            +'<div class="row"> '
+                +'<div class="col-1"> '
+                    +'<i class="fas fa-truck"></i> '
                 +'</div>'
+                +'<div class="col-10">'
+                    +'<p>' + result.data.formaEntrega + '</p>'
+                +' </div>'
+            +'</div>'
+            +'<div class="row"> '
+                +'<div class="col-1"> '
+                    +'<i class="fas fa-map-marker-alt"></i> '
                 +'</div>'
+                +'<div class="col-10">'
+                    +'<p>' +result.data.endereco+', '+result.data.nomeCidade+'</p>'
                 +'</div>'
-                );
-                
-                $("#cardb" + index).removeClass('d-none');
-                
-                //$("#info"+index).attr("idProdutor",result[index].idProdutor);
-                if (value.img) {
-                    var urlimagem = "http://projetomaosdadas.emcomp.com.br/public/img/produtores/";
-                    $("#imagens" + index).attr("src", urlimagem + value.img);
-                }
-                var url = "https://api.whatsapp.com/send?phone=";
-                var mensagem = '&text=Olá! Acessei seu contato através do "Projeto Rio Pomba e região de mãos dadas".  Pode me atender?';
-                var linkCompleto = url + value.whatsapp + mensagem;
-                $("#link" + index).attr("href", linkCompleto);
-                
-                
-                $("#categoria" + index).append('<i class="fas fa-'+value.icon+'"></i> '+value.nomeTipo);
-                
-            
-        });
-        
-    }
+            +'</div>'
+        );
+}
