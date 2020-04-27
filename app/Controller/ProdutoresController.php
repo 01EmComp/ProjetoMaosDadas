@@ -37,7 +37,7 @@ class ProdutoresController extends Render
 	{
 		
 		$tipo = new DaoTipos();
-		$tipo = $tipo->getNomeTipo($this->idTipo);
+		$tipo = $tipo->getTipo($this->idTipo);
 		$tipo =json_decode($tipo);
 		if ($tipo->success) {
 			echo $tipo->data->nome;
@@ -55,6 +55,8 @@ class ProdutoresController extends Render
 			$produtores = json_decode($produtores->selectProdutores($tipo,$cidade));
 			if ($produtores->success) {
 				
+		$msg = 'Ol%C3%A1!%20%20Acessei%20seu%20contato%20atrav%C3%A9s%20do%20%22Projeto%20Rio%20Pomba%20e%20regi%C3%A3o%20de%20m%C3%A3os%20dadas%22.%20%20Pode%20me%20atender%3F';
+		
 				$i = 0;
 				$result = "";
 				foreach ($produtores->data as $key => $value) {
@@ -83,7 +85,7 @@ class ProdutoresController extends Render
 					</p>
 					</div>
 					<a class="list-group-item" href="https://api.whatsapp.com/send?phone='.$value->whatsapp.'
-					&text==Ol%C3%A1%2C%20tudo%20bem%3F%20Quero%20comprar%3A" target="_blank">
+					&text='.$msg.'" target="_blank">
 					<div class="card-footer">
 					<img class="card-img-top" src="'.DIRIMG.'wpp.png" alt="">
 					</div>

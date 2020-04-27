@@ -1,15 +1,10 @@
-<div class="home-container">
-	
-	
-	<div class="card">
-		<div class="class-head" style="text-align: left; padding-left: 12px;"><h1>Escolha sua cidade</h1></div>
-		<div class="card-body">
-			<div class="card">
-				
-			</div>
-			<div class="row">
-				<?=$this->getCidades()?>
-			</div>
-		</div>
-	</div>
+<div class="alert alert-light" role="alert">
+  <strong>Produto do projeto Rio Pomba e Região de Mãos Dadas</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="container mt-4">
+  <div class="row" id="city">
+  </div>
 </div>

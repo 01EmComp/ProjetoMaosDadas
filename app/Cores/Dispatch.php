@@ -44,6 +44,7 @@ class Dispatch extends Routes
 			self::addParam();
 			call_user_func_array([$this->obj,$this->getMethod()],$this->getParam());
 		}
+
 	}
 	public function addParam(){
 		$countArray = count($this->traitUrl()); 

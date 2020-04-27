@@ -52,10 +52,10 @@ class DaoCidades
 		
 		
 		
-		public function getNome($id)
+		public function selectCidade($id)
 		{
 			try {
-				$query = "SELECT nome FROM Cidades WHERE idCidade = :id";
+				$query = "SELECT * FROM Cidades WHERE idCidade = :id";
 				
 				$stmt = $this->con->prepare($query);
 				$stmt->bindValue(':id',$id);
@@ -63,7 +63,10 @@ class DaoCidades
 				$stmt->execute();
 				$rst = $stmt->fetch(\PDO::FETCH_ASSOC);
 				
-				$name = array("nome" => $rst['nome']);
+				$name = array("nome" => $rst['nome'],
+				"uf" => $rst['uf'],
+				"cep" => $rst['cep'],
+				"img" => $rst['img']);
 				
 				$data['success'] = true;
 				$data['data'] = $name;
@@ -112,6 +115,64 @@ class DaoCidades
 			//header("Content-Type: application/json; charset=UTF-8");
 			return json_encode($data);
 		}
+
+
+		public function editarCidade(ModelCidades $cidade)
+		{
+			try {
+				$query = "UPDATE `Cidades` SET `nome`=:nome,`cep`=:cep,
+				`uf`=:uf WHERE idCidade=:id";
+				$stmt = $this->con->prepare($query);
+				$stmt->bindValue(':id',$cidade->getIdCidade());
+				$stmt->bindValue(':nome',$cidade->getNome());
+				$stmt->bindValue(':cep',$cidade->getCep());
+				$stmt->bindValue(':uf',$cidade->getUf());
+					
+				if($stmt->execute()){
+
+					$data['success'] = true;
+					$data['msg'] = "Cadastrada com sucesso";
+				}
+				else{
+					$data['success'] = false;
+					$data['msg'] = $stmt->errorInfo();
+				}
+			} catch (Exception $e) {
+				
+				$data['success'] = false;
+				$data['msg'] = 'Error: '.$e->getMessage();
+			}	
+			
+			//header("Content-Type: application/json; charset=UTF-8");
+			return json_encode($data);
+		}
+
+		public function apagar($id)
+	{
+		try {
+			$query = "DELETE FROM `Cidades` WHERE `idCidade`=:id;";
+			$stmt = $this->con->prepare($query);
+			
+			$stmt->bindValue(':id',$id);
+			
+			if($stmt->execute()){
+				$data['success'] = true;
+				$data['data'] = "Apagado com sucesso.";
+			}
+			else{
+				$data['success'] = false;
+				$data['data'] = $stmt->errorInfo();
+			}
+		} catch (Exception $e) {
+			
+			$data['success'] = false;
+			$data['data'] = 'Error: '.$e->getMessage();
+		}	
+		
+		//header("Content-Type: application/json; charset=UTF-8");
+		return json_encode($data);
+	}	
+
 		public function setImgName($id,$imgName){
 			
 			try {

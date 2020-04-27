@@ -22,3 +22,5 @@
 
 <!--Script local-->
 <script type="text/javascript" src="<?=DIRPAGE?>app/View/Login/script.js"></script>
+<!--Script do reCATPTCHA da google-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
