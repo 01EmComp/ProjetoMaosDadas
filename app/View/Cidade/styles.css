@@ -4,10 +4,13 @@
 .list-group-item{
     cursor: pointer;
 }
-@media(min-width: 768px){
+
+
     #topo{
         position: -webkit-sticky;
         position: sticky;
         top: 0;
         padding: 5px;
-}
+        overflow: auto;
+    }
+

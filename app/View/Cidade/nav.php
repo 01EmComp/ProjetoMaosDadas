@@ -1,4 +1,4 @@
-<header>
+<header >
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <a class="navbar-brand" href="<?=DIRPAGE?>"><img src="<?=DIRIMG?>Logo-projeto.png" width="150" height="50"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

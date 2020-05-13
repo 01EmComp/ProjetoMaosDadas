@@ -106,7 +106,10 @@ class ApiController{
         public function notificacoes(){
             
             $notify = array(
-                array("title"=>"Teste","body"=>"Testando notificações"),
+                array("title"=>"Teste","body"=>"Testando notificações",
+                    "link"=>array(
+                        array("href"=>"emcomp.com.br","body"=>"emcomp")
+                    )),
             );
             
             header("Access-Control-Allow-Origin: *");
