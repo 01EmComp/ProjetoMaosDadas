@@ -133,13 +133,13 @@ class DaoTipos {
 	
 	public function getTipos(){
 		try {
-			$query = "SELECT * FROM Tipos";
+			$query = "SELECT * FROM Categorias";
 			$stmt = $this->con->prepare($query);
 
 			$stmt->execute();
 			$tips = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
-				$tip = array("idTipo" => $resultado['idTipo'],
+				$tip = array("idTipo" => $resultado['idCategoria'],
 					"nome" => $resultado['nome'],
 					"icon" => $resultado['icon']
 				);

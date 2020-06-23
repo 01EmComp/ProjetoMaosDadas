@@ -1,102 +1,18 @@
-#captcha{
-	align-self: center;
-	display: block;
-	margin: 12px auto;
-	width: auto;
+body {
+	background: rgb(101,233,110);
+background: linear-gradient(90deg, rgba(101,233,110,1) 1%, rgba(171,255,178,1) 51%, rgba(111,255,125,1) 100%);
 }
-.login{
-	background-color: #000000ba;
-	width: 380px;
-	height: 399px;
-	margin: auto;
-	border-radius: 10px;
-	margin-top: 6%;
-	text-align: center;
-}
-@media screen and (max-width: 1125px) {
-	.login{
-		margin-top: 8%;
+
+@media screen and (max-width:769px){
+	.card{
+		width: 300px !important;
+		margin-top: 20px;
+		box-shadow: 0 0 4px #000;
 	}
 }
-@media screen and (max-width: 820px) {
-	.login{
-		margin-top: 14%;
-	}
-}
-@media screen and (max-width: 480px) {
-	.login{
-		margin-top: 24%;
-	}
-}
-.login:hover{
-	transition-duration: 300ms;
-	background-color: #000000dd;
-}
 
-.login .loginContainer{
-	width: 99%;
-	height: 100%;
-}
-
-
-.login input{
-	font: 400 18px Roboto, sans-serif; 
-	margin: 0px auto 6px auto;
-	width: 80%;
-	border: 1px solid #ced4da;
-	height: 34px;
-	border-width: 2px;
-	border-radius: 4px;	
-	font-size: 24px;
-	padding: 0 10px;
-}
-
-.login input:focus{
-	border-color: #0074e0;	
-	outline: 0;
-	box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
-}
-.login input:hover{
-	border-color: #0074e0;	
-	outline: 0;
-	box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
-}
-.login button{
-	margin: auto;
-	display: block;
-	width: 100px;
-	height:50px;
-	border:solid 1px #d8393a;
-	border-radius: 4px;
-	color: #d8393a;
-	font-size: 24px;
-	background-color:#00000050;
-	cursor:pointer;
-	
-}
-.login button:hover{
-	transition-duration: 300ms;
-	background-color: #d8393a;
-	color: #000;
-}
-.login a{
-	text-decoration: none;
-	font-size: 20px;
-	color: #d8393a;
-	font-family: arial;
-}
-.login a:hover{
-	color: #c7494a;
-}
-
-.error{
-	width: 600px; 
-	margin: auto; 
-	margin-top:20%; 
-	border:1px solid #000;
-	border-radius: 6px;
-	display: block; 	
-}
-.footer{
-	position: fixed;
+.card{
+	width: 350px;
+	margin-top: 20px;
+	box-shadow: 0 0 4px #000;
 }

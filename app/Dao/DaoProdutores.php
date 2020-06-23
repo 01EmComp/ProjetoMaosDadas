@@ -20,10 +20,10 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT `img`, `idProdutor`, `nomeProdutor`, `nomeSocial`, 
+			$query = "SELECT `img`, `idProdutor`, `nomeNegocio`, `nomeSocial`, 
 			`whatsapp`, `endereco`, `descricao`, `formaPagamento`,`formaEntrega`, 
 			`keyWords`, `nomeCidade`, `idTipo`,`nomeTipo`,`icon` FROM `VisaoGeralTiposProdutores` 
-			WHERE idTipo = :tipo AND idCidade = :cidade ORDER BY nomeProdutor ASC";
+			WHERE idTipo = :tipo AND idCidade = :cidade ORDER BY nomeNegocio ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':tipo',$tipo);
 			$stmt->bindValue(':cidade',$cidade);
@@ -32,7 +32,7 @@ class DaoProdutores
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 				$produtor = array("idTipo" => $resultado['idTipo'],
 				"idProdutor" => $resultado['idProdutor'],
-				"nomeProdutor" => $resultado['nomeProdutor'], 
+				"nomeNegocio" => $resultado['nomeNegocio'], 
 				"nomeCidade" => $resultado['nomeCidade'], 
 				"endereco" => $resultado['endereco'], 
 				"whatsapp" => $resultado['whatsapp'],
@@ -65,28 +65,28 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT  DISTINCT idProdutor,`nomeProdutor`, `nomeSocial`,
-			 `whatsapp`, `endereco`, `descricao`, `formaPagamento`, `formaEntrega`,
-			 `keyWords`, `nomeCidade`, `idTipo`, `idCidade`,`img`,`nomeTipo`,`icon` FROM `VisaoGeralTiposProdutores`res 
-			WHERE idCidade = :cidade ORDER BY nomeProdutor ASC";
+			$query = "SELECT  DISTINCT idNegocio,`nomeNegocio`,
+			`whatsapp`, `endereco`, `descricao`, `formaPagamento`, `formaEntrega`,
+			`keyWords`, `nomeCidade`, `idCategoria`, `idCidade`,`img`,`nomeCategoria`,`icon` FROM 
+			`VisaoGeralTiposProdutores`
+		   WHERE idCidade = :cidade ORDER BY nomeNegocio ASC";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':cidade',$cidade);
 			$stmt->execute();
 			$produtores = array();
 			while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
-				$produtor = array("idTipo" => $resultado['idTipo'],
-				"idProdutor" => $resultado['idProdutor'],
-				"nomeProdutor" => $resultado['nomeProdutor'], 
+				$produtor = array(
+				"idProdutor" => $resultado['idNegocio'],
+				"nomeNegocio" => $resultado['nomeNegocio'], 
 				"nomeCidade" => $resultado['nomeCidade'], 
 				"endereco" => $resultado['endereco'], 
 				"whatsapp" => $resultado['whatsapp'],
 				"descricao" => $resultado['descricao'],
 				"formaPagamento" => $resultado['formaPagamento'],
 				"formaEntrega" => $resultado['formaEntrega'],
-				"nomeSocial" => $resultado['nomeSocial'],
 				"keyWords" => $resultado['keyWords'],
-				"idTipo" => $resultado['idTipo'],
-				"nomeTipo" => $resultado['nomeTipo'],
+				"idTipo" => $resultado['idCategoria'],
+				"nomeTipo" => $resultado['nomeCategoria'],
 				"icon" => $resultado['icon'],
 				"img" => $resultado['img']
 			);
@@ -112,7 +112,7 @@ class DaoProdutores
 	{
 		
 		try {
-			$query = "SELECT * FROM VisaoGeralTiposProdutores ORDER BY nomeProdutor ASC";
+			$query = "SELECT * FROM VisaoGeralTiposProdutores ORDER BY nomeNegocio ASC";
 			$stmt = $this->con->prepare($query);
 			
 			if($stmt->execute()){
@@ -121,19 +121,18 @@ class DaoProdutores
 
 				while($resultado = $stmt->fetch(\PDO::FETCH_ASSOC)){
 					$produtor = array(
-						"idProdutor" => $resultado['idProdutor'],
+						"idProdutor" => $resultado['idNegocio'],
 						"idCidade" => $resultado['idCidade'],
-						"nomeProdutor" => $resultado['nomeProdutor'], 
+						"nomeProdutor" => $resultado['nomeNegocio'], 
 						"nomeCidade" => $resultado['nomeCidade'], 
 						"endereco" => $resultado['endereco'], 
 						"whatsapp" => $resultado['whatsapp'],
 						"descricao" => $resultado['descricao'],
 						"formaPagamento" => $resultado['formaPagamento'],
 						"formaEntrega" => $resultado['formaEntrega'],
-						"nomeSocial" => $resultado['nomeSocial'],
 						"keyWords" => $resultado['keyWords'],
-						"idTipo" => $resultado['idTipo'],
-						"nomeTipo" => $resultado['nomeTipo'],
+						"idTipo" => $resultado['idCategoria'],
+						"nomeTipo" => $resultado['nomeCategoria'],
 						"icon" => $resultado['icon'],
 						"img" => $resultado['img']
 					);
@@ -164,27 +163,29 @@ class DaoProdutores
 		
 		try {
 			$query = "SELECT * FROM VisaoGeralTiposProdutores WHERE 
-			idProdutor = :produtor ORDER BY nomeProdutor ASC";
+			idUsuario = :produtor";
 			$stmt = $this->con->prepare($query);
 			
 			$stmt->bindValue(':produtor',$idProdutor);
-			
-			if($stmt->execute()){
+			$stmt->execute();
+			if($stmt->rowCount()==1){
 				
 				$resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
 				
 				$produtor = array(
-					"idProdutor" => $resultado['idProdutor'],
-					"nomeProdutor" => $resultado['nomeProdutor'], 
+					"idProdutor" => $resultado['idNegocio'],
+					"idCidade" => $resultado['idCidade'],
+					"nomeProdutor" => $resultado['nomeNegocio'], 
 					"nomeCidade" => $resultado['nomeCidade'], 
 					"endereco" => $resultado['endereco'], 
 					"whatsapp" => $resultado['whatsapp'],
 					"descricao" => $resultado['descricao'],
 					"formaPagamento" => $resultado['formaPagamento'],
 					"formaEntrega" => $resultado['formaEntrega'],
-					"nomeSocial" => $resultado['nomeSocial'],
 					"keyWords" => $resultado['keyWords'],
-					"idTipo" => $resultado['idTipo'],
+					"idTipo" => $resultado['idCategoria'],
+					"nomeTipo" => $resultado['nomeCategoria'],
+					"icon" => $resultado['icon'],
 					"img" => $resultado['img']
 				);
 				
@@ -193,8 +194,7 @@ class DaoProdutores
 			}
 			else{
 				$data['success'] = false;
-				$data['data']= 'Erro ao buscar comprador';
-				$data['msg'] = $stmt->errorinfo();
+				$data['data']= 'O produtor não tem nenhum negócio cadastrado';
 			}
 			
 		} catch (Exception $e) {

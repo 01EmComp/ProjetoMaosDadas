@@ -118,8 +118,14 @@ h1.nomecidade{
   background-color: #f5f5f5;
   @include border-radius($border-radius);
 }
-
+.spinner-border{
+  width: 90px;
+  height: 90px;
+  border-width: 8px!important;
+}
 .lds-ring {
+  align-self: center;
+  justify-content: center;
   display: inline-block;
   position:relative;
   width: 80px;
@@ -167,6 +173,9 @@ h1.nomecidade{
     margin-top: 160px;
 }
 
+html{
+  height: 100%;
+}
 
 #myFooter {
     background-color: #28a745;
@@ -267,10 +276,6 @@ h1.nomecidade{
     #myFooter {
         text-align: center;
     }
-}
-
-html{
-    height: 100%;
 }
 
 body{

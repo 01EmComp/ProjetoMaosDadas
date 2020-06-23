@@ -1,16 +1,43 @@
-.produtores{
-    cursor: pointer;
-}
-.list-group-item{
+.produtores {
     cursor: pointer;
 }
 
+.list-group-item {
+    cursor: pointer;
+}
 
-    #topo{
+@media screen and (min-width: 1125px) {
+    #topo {
+        max-height: 86vh;
         position: -webkit-sticky;
         position: sticky;
         top: 0;
         padding: 5px;
         overflow: auto;
     }
+}
 
+#topo {
+
+  
+}
+#listToggle {
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+    align-content: center;
+    top: 0;
+    width: 40px;
+    height: 50px;
+    background-color: #28a745;
+    box-shadow: 0 0 4px #000 ;
+}
+
+#btnMenuIcon {
+    width: 25px;
+    height: 25px;
+}
+
+.card-title {
+    font-weight: 700;
+}

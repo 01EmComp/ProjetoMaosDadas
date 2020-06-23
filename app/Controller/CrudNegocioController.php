@@ -19,12 +19,9 @@ class CrudProdutoresController{
     
     public function cadastrar(){
         
-        if((isset($_POST['nome']))&&(isset($_POST['nomeSocial']))&&(isset($_POST['whatsapp']))
-            &&(isset($_POST['endereco']))&&(isset($_POST['formaPagamento']))&&(isset($_POST['idCidade']))
-            &&(isset($_POST['formaEntrega']))&&(isset($_POST['descricao']))&&(isset($_POST['idTipo']))
-            &&(isset($_POST['keywords']))){
+        if(isset($_POST)){}
             
-            $produtor = new ModelProdutor();
+        $produtor = new ModelProdutor();
         
         $produtor->setNome($_POST['nome']);
         $produtor->setIdCidade($_POST['idCidade']);
@@ -64,11 +61,6 @@ class CrudProdutoresController{
             $data['msg'] = "Erro ao casdastrar, ".$result->msg;
         }
         
-    }
-    else{
-        $data['success']=false;
-        $data['msg'] = "Erro ao casdastrar, faltaram alguns dados.";
-    }
     header("Content-Type: application/json; charset=UTF-8");
     echo json_encode($data);
 }
@@ -217,6 +209,3 @@ public function selectProdutor($idProdutor){
 }   
 
 }
-
-
-?>

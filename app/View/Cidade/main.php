@@ -5,25 +5,18 @@
                 <li class="breadcrumb-item" id="home"></li>
                 <li class="breadcrumb-item" id="nomeCidade"></li>
                 <li class="breadcrumb-item active" id="categoria">
-                        Todos
+                    Todos
                 </li>
             </ol>
 
         </div>
     </div>
-    
+
     <div class="row">
-        <div class="col-md-3 sticky-top bd-sidebar">
-            <div id="topo" style="max-height: 90vh;">
-                <ul class="list-group mt-2 mb-2 mr-2 ml-2 border-1" id="list">
-                    <li class="list-group-item list-group-item-action border-0 active sticky-top" id="listToggle">
-                        
-                        <span>Menu</span>
-                            <span class="fa fa-angle-down float-right" id="btnMenuIcon"></span>
-                    </li>
-                    <div class="collapse" id="minhaLista">
-                    </div>
-                </ul>
+        <div class="col-md-3" style="position:sticky; top:0; z-index:1020;">
+            <div id="topo" >
+                <div id="menu">
+                </div>
             </div>
         </div>
         <div class="col-md-9">
@@ -38,7 +31,8 @@
             <span class="row" id="cards"></span>
         </div>
     </div>
-    
+    <div id="menuModal">
+    </div>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -58,10 +52,10 @@
             </div>
         </div>
     </div>
-    
-    <button style="z-index:1060;" onClick="scrolToTop()" class="btn btn-posicao btn-dark float-right mr-3">
+
+    <button style="z-index:1060;" onClick="scrolToTop(body)" class="btn btn-posicao btn-dark float-right mr-3">
         <i class="fas fa-chevron-circle-up"></i>
     </button>
-    
-    <input type="hidden" name="idCidade" value="<?=$this->getIdCidade()?>" id="city"/>
+
+    <input type="hidden" name="idCidade" value="<?= $this->getIdCidade() ?>" id="city" />
 </div>

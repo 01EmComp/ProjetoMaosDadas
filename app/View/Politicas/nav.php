@@ -11,7 +11,9 @@
                     <a class="nav-link" href="<?=DIRPAGE?>"><h5>Início</h5><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><h5>Sobre</h5></a>
+                    <a class="nav-link" href="<?= DIRPAGE ?>sobre">
+                        <h5><i class="fas fa-info"></i> Sobre</h5>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?=DIRPAGE?>/contato"><h5>Contato</h5></a>
