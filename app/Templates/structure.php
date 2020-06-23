@@ -3,13 +3,7 @@
 
 <head>
     <title><?= NAME . " - " . $this->getTitle() ?></title>
-    <meta name="google-site-verification" content="zsRbfjh3WGrFJv9kOfwYlR1vuU-Djc1VOaDerBEaoJM" />
     <meta charset="utf-8">
-
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/solid.min.js" crossorigin="anonymous"></script>
-
-
 
     <!--Icone-->
     <link rel="icon" href="<?= DIRIMG ?>/favicon.png">
@@ -22,7 +16,13 @@
     <!--Meta tag de recursividade para dispositivos moveis-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Script do JQUERY-->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="<?= DIRPAGE . 'vendor/components/jquery/jquery.min.js'?>"></script>
+    
+    
+    <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/all.js'?>"></script>
+    <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/regular.min.js'?>"></script>
+    <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/solid.min.js'?>"></script>
+
     <?= $this->addHead() ?>
 </head>
 
