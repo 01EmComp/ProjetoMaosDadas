@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ebc4ec4ce3396d51784893a59dee1eb",
+    "content-hash": "11200b9d73e67c843366c83238de9055",
     "packages": [
         {
             "name": "components/jquery",
@@ -47,6 +47,45 @@
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
             "time": "2020-05-05T13:21:02+00:00"
+        },
+        {
+            "name": "epochjs/epoch",
+            "version": "v0.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/epochjs/epoch.git",
+                "reference": "93c4bb0cadeda4fa67e2efc0fbeee102aef944ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/epochjs/epoch/zipball/93c4bb0cadeda4fa67e2efc0fbeee102aef944ff",
+                "reference": "93c4bb0cadeda4fa67e2efc0fbeee102aef944ff",
+                "shasum": ""
+            },
+            "require": {
+                "mbostock/d3": "@stable"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Sandor Richards"
+                }
+            ],
+            "description": "A general purpose, real-time visualization library.",
+            "homepage": "https://github.com/epochjs/epoch",
+            "keywords": [
+                "chart",
+                "d3",
+                "epoch",
+                "graph",
+                "plot",
+                "real-time"
+            ],
+            "time": "2015-10-30T20:44:40+00:00"
         },
         {
             "name": "fortawesome/font-awesome",
@@ -110,6 +149,43 @@
                 "svg"
             ],
             "time": "2020-06-18T20:53:17+00:00"
+        },
+        {
+            "name": "mbostock/d3",
+            "version": "v3.5.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mbostock/d3.git",
+                "reference": "9cc9a875e636a1dcf36cc1e07bdf77e1ad6e2c74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mbostock/d3/zipball/9cc9a875e636a1dcf36cc1e07bdf77e1ad6e2c74",
+                "reference": "9cc9a875e636a1dcf36cc1e07bdf77e1ad6e2c74",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bostock",
+                    "homepage": "http://bost.ocks.org/mike"
+                }
+            ],
+            "description": "A JavaScript visualization library for HTML and SVG.",
+            "homepage": "http://d3js.org/",
+            "keywords": [
+                "W3C",
+                "animation",
+                "canvas",
+                "dom",
+                "svg",
+                "visualization"
+            ],
+            "time": "2016-05-05T00:29:22+00:00"
         },
         {
             "name": "smottt/wideimage",

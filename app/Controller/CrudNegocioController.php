@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-use App\Model\ModelProdutor;
-use App\Dao\DaoProdutores;
 use App\Dao\DaoCidades;
-use App\Dao\DaoTipos;
 use App\Model\ModelNegocio;
 use Classes\UploadImagens;
 
@@ -36,12 +33,12 @@ class CrudNegocioController
     }
 
 
-    public function cadastrar($data)
-    {
+    public function cadastrar($data){
         
+        $produtor = $this->encapsule($data);
 
-        $daoProdutor = new DaoProdutores();
-        $result = $daoProdutor->cadastra($produtor);
+        $daoNegocio = new DaoNegocio();
+        $result = $daoNegocio->cadastra($produtor);
         $result = json_decode($result);
         if ($result->success) {
             if (isset($_FILES['img'])) {

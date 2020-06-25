@@ -4,21 +4,25 @@
 <head>
     <title><?= NAME . " - " . $this->getTitle() ?></title>
     <meta charset="utf-8">
-
+    
     <!--Icone-->
     <link rel="icon" href="<?= DIRIMG ?>/favicon.png">
+    
     <!--Bootstrap-->
     <link rel="stylesheet" type="text/css" href="<?= DIRPAGE . 'vendor/twbs/bootstrap/dist/css/bootstrap.min.css' ?>">
+    
     <!--Local css-->
     <link rel="stylesheet" type="text/css" href="<?= DIRCSS ?>styles.css">
     <link rel="stylesheet" type="text/css" href="<?= DIRCSS ?>main.css">
     <link rel="stylesheet" type="text/css" href="<?= DIRCSS ?>animate.css">
+    
     <!--Meta tag de recursividade para dispositivos moveis-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <!--Script do JQUERY-->
     <script src="<?= DIRPAGE . 'vendor/components/jquery/jquery.min.js'?>"></script>
     
-    
+    <!--Scripts Font Awesome-->
     <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/all.js'?>"></script>
     <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/regular.min.js'?>"></script>
     <script src="<?= DIRPAGE . 'vendor/fortawesome/font-awesome/js/solid.min.js'?>"></script>
