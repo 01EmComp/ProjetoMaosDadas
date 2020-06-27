@@ -25,12 +25,11 @@ $(document).ready(async () => {
         await  $.ajax({
             url: urlRequisicao+'crudprodutores/cadastrar', //o arquivo para o qual deseja fazer a requisição
             type: 'POST', //metodo de envio
-            
             data: form,
             contentType: false,
             processData: false,
             success: async (resposta) => {
-                console.log(resposta);
+               // console.log(resposta);
                 if(resposta.success){
                     await alert(resposta.msg);
                     await loadSelects();

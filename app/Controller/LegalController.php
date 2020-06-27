@@ -1,7 +1,7 @@
 <?php 
 namespace App\Controller;
 use Classes\Render;
-class PoliticasController extends Render{
+class LegalController extends Render{
     //boleano, se verdadeiro é as politcas de privacidade, se false termos de uso
     public $privacidade;
     function __construct() {

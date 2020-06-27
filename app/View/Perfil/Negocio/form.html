@@ -1,0 +1,125 @@
+<form class="form-group mt-2" id="formCadastraNegocio">
+
+  <div class="form-group" id="nomeNegocio">
+    <label for="inputNomeCadastrarProdutor">Nome</label>
+    <input data-form="nomeNegocio" id="inputNomeCadastrarProdutor" name="nome" type="text" class="form-control"
+      placeholder="Nome" required>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-8" id="whatsapp">
+      <label for="inputWhatsappCadastrarProdutor">WhatsApp</label>
+      <input data-form="whatsapp" id="inputWhatsappCadastrarProdutor" name="whatsapp" type="tel" class="form-control"
+        placeholder="WhatsApp - Deixe em branco se o numero for igual ao o numero já cadastrado" required>
+    </div>
+
+
+    <div class="form-group col-md-4" id="cidade">
+      <label for="idCidadeCadastrarProdutor">Cidade</label>
+      <select data-form="cidade" name="idCidade" id="idCidadeCadastrarProdutor" class="form-control cidade"
+        placeholder="Cidade">
+        <option disabled selected>Cidade</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="form-group" id="endereco">
+    <label for="inputEnderecoCadastrarProdutor">Endereco</label>
+    <input data-form="endereco" id="inputEnderecoCadastrarProdutor" name="endereco" type="text" class="form-control"
+      placeholder="Endereço" required>
+  </div>
+
+  <div id="formas">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="inputFormPagamentoCadastrarProdutor">Forma de pagamento</label>
+        <input data-form="formaPagamento" id="inputFormPagamentoCadastrarProdutor" name="formaPagamento" type="text"
+          class="form-control" placeholder="Forma de pagamento" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputFormaEntregaCadastrarProdutor">Forma de entrega</label>
+        <input data-form="formaEntrega" id="inputFormaEntregaCadastrarProdutor" name="formaEntrega" type="text"
+          class="form-control" placeholder="Forma de entrega" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputCategoriaCadastrarProdutor">Categoria</label>
+        <select data-form="categoriaNegocio" name="idCategoria" id="categoriaNegocio" class="form-control categoria">
+          <option selected disabled>Categoria</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="sobre" class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputKeywordsCadastrarProdutor">Palavras chaves</label>
+      <input data-form="keywords" id="inputKeywordsCadastrarProdutor" name="keywords" type="text" class="form-control"
+        placeholder="Palavras chaves" required>
+    </div>
+    <div class="form-group col-md-7">
+      <label for="inputDescricaoCadastrarProdutor">Descricao</label>
+      <textarea data-form="descricao" id="inputDescricaoCadastrarProdutor" name="descricao" class="form-control"
+        placeholder="Quais categorias vende"></textarea>
+    </div>
+  </div>
+
+  <div id="imgContainer" class="img">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+      </div>
+      <div class="custom-file">
+        <input name="img" type="file" class="custom-file-input" id="img" accept="image/*"
+          aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" for="img">Escolha uma imagem</label>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <div class="form-group" style="margin-top: 8px;">
+    <button type="submit" class="btn btn-success btn-block">
+      Cadastrar
+    </button>
+  </div>
+</form>
+
+<div class="card card-tamanho animated fadeIn slow border-0 bg-white mt-2 mb-2 mr-2" style="box-shadow:0 0 4px #000"
+  id="cardNegocio">
+  <div class="img-hover-btightness h-100">
+    <img class="card-img-top card-img-tamanho produtores" src="" alt="Sem imagem" id="img">
+  </div>
+  <div class="card-body d-none d-flex flex-column">
+    <div class="row">
+      <div class="col-7" style="margin:0; padding:2px;">
+        <h6 class="card-subtitle mb-2 text-muted" id="categoria">
+          Sem categoria
+        </h6>
+      </div>
+      <div class="col-5" style="margin:0; padding:2px;">
+        <h6 class="card-subtitle mb-2 text-muted" id="localizacao">
+          <i class="fas fa-map-marker-alt"></i>
+          Sem cidade
+        </h6>
+      </div>
+    </div>
+    <h5 class="card-title" id="nomeNegocio">
+      SEM NOME
+    </h5>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-7" style="margin:0; padding:2px;">
+        <button target="_BLANK" href="#" class="btn btn-success btn-block" disabled>
+          <i class="fab fa-whatsapp"></i> WhastApp
+        </button>
+      </div>
+      <div class="col-5" style="margin:0; padding:2px;">
+        <button type="button" class="btn btn-dark btn-block teste" data-toggle="modal" disabled>
+          <i class="fas fa-info"></i> Ler Mais
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

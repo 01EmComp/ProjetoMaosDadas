@@ -13,7 +13,9 @@ class DaoUsuarios {
     
     public function verificaLogin($login,$senha){
         try {
-            $query = "SELECT idAdmin,login FROM Administradores WHERE login = :login AND senha = :senha";
+
+            $query = $this->findQuery($login);
+           
             $stmt = $this->con->prepare($query);
             
             $senha = hash("sha256",$senha,false);
@@ -25,8 +27,8 @@ class DaoUsuarios {
             if($stmt->rowCount() == 1){
                 $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
                 $user = array(
-                    "idAdmin" => $resultado['idAdmin'],
-                    "login" => $resultado['login']);
+                    "userId" => $resultado['idUsuario'],
+                    "nome" => $resultado['nome']);
                     
                     $data['success'] = true;
                     $data['data'] = $user;
@@ -35,13 +37,27 @@ class DaoUsuarios {
                     $data['data'] = "Usuario não encontrado";
                 }
                 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 
                 $data['success'] = false;
                 $data['data'] = 'Error: '.$e->getMessage();
             }
             //header("Content-Type: application/json; charset=UTF-8");
             return json_encode($data);
+        }
+        private function findQuery($login){
+            if(is_numeric($login)){
+                $query = "SELECT idUsuario,nome FROM Usuarios WHERE whatsapp = :login AND senha = :senha";
+                return $query;
+            }
+            else if((strpos($login,'.com'))&&(strpos($login,'@'))){
+                $query = "SELECT idUsuario,nome FROM Usuarios WHERE email = :login AND senha = :senha";
+                return $query;
+            }
+            else{
+                $query = "SELECT idUsuario,nome FROM Usuarios WHERE login = :login AND senha = :senha";
+                return $query;
+            }
         }
     }
     ?>

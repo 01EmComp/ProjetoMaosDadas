@@ -33,3 +33,8 @@ body{
 	text-align: center;
 	height: 32px;
 }
+
+.navbar {
+z-index: 1030;
+width: 100%;
+}

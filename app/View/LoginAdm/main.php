@@ -1,0 +1,25 @@
+<div class="login" id="login">
+	<div  id="loader" hidden></div>
+	<div class="loginContainer" id="loginContainer">
+		<form id="loginForm" onsubmit="">
+
+			<br>
+			<input type="text" name="username" id="username" placeholder="Login" required>
+			<br>
+			<input type="password" name="password" id="senha" placeholder="Senha" required>
+			<br>
+			<center>
+				<div class="g-recaptcha" data-sitekey="<?=PubKey?>" id="captcha"></div>
+				<p hidden id="alert" data-callback="recaptchaCallback" style="color:#f00; font-size: 19px; font-family: arial; background-color: #000;">&emsp;</p>
+			</center>
+			<br>
+			<button id="btnSubmitLogin">Login</button>
+			<br>
+		</form>
+	</div>
+</div>
+
+<!--Script local-->
+<script type="text/javascript" src="<?=DIRPAGE?>app/View/LoginAdm/script.js"></script>
+<!--Script do reCATPTCHA da google-->
+<script src='https://www.google.com/recaptcha/api.js'></script>

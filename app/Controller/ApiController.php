@@ -1,14 +1,64 @@
 <?php
+
 namespace App\Controller;
-use App\Model\ModelProdutor;
-use App\Dao\DaoProdutores;
-use App\Dao\DaoCidades;
-use App\Dao\DaoTipos;
+
+
+use Classes\StrValidator;
 use Classes\UploadImagens;
 
-class ApiController{
-    
-    public function getCidades(){
+class ApiController
+{
+
+
+    private $crudNegocios;
+    private $crudCidades;
+    private $crudCategorias;
+    function __construct()
+    {
+        $this->crudCidades = new DaoCidades;
+        $this->crudNegocios = new DaoNegocios;
+        $this->daoCategorias = new DaoCategorias
+    }
+
+    private function veririficSessão($sessionId)
+    {
+        session_start();
+        return session_id() == $sessionId ? true : false;
+    }
+
+
+    public function cadastroNegocio($token){
+        if ($this->veririficSessão($token)) {
+            if (isset($_POST)) {
+                $post = $_POST;
+                $negocio = new ModelNegocio;
+                var_dump($_POST);
+                $result = array("success" => true, "msg" => "Cadastrado com sucesso");
+            } else {
+                $result = array("success" => false, "msg" => "Nenhum dado recebido");
+            }
+        } else {
+            $result = array("success" => false, "msg" => "Usuário não autenticado");
+        }
+        header("Access-Control-Allow-Origin: *");
+     //   header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    public function verNegocio($token)
+    {
+        if ($this->veririficSessão($token)) {
+            $result = array("success" => false, "msg" => "Usuário não autenticado");
+        } else {
+            $result = array("success" => false, "msg" => "Usuário não autenticado");
+        }
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    public function getCidades()
+    {
         $cidades = new DaoCidades();
         $cidades = json_decode($cidades->selectCidades());
         $citys = array();
@@ -16,105 +66,111 @@ class ApiController{
             $cidade = array(
                 "idCidade" => $value->idCidade,
                 "nome" => $value->nome,
-                "img" => $value->img);
-                array_push($citys,$cidade);                
-            }
-            // required headers
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode($citys, JSON_PRETTY_PRINT);
-        }
-        
-        public function selectProdutores($cidade){
-            
-            $daoProdutores = new DaoProdutores();
-            $produtores = json_decode($daoProdutores->selectProdutores($cidade));
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode($produtores, JSON_PRETTY_PRINT);
-        }
-        
-        public function getTipos(){
-            $daoTipos = new DaoTipos();
-            $result = json_decode($daoTipos->getTipos());
-            $tipos = array();
-            foreach ($result->data as $key => $value) {
-                if($value->icon == null){
-                    $icon = "";
-                }
-                else{
-                    $icon = $value->icon;
-                }
-                $tipo = array(
-                    "idTipo" => $value->idTipo,
-                    "nome" => $value->nome,
-                    "icon" => $icon
-                );
-                array_push($tipos,$tipo);                
-            }
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode($tipos, JSON_PRETTY_PRINT);
-        }
-        public function getTiposCidade($idCidade){
-            $daoTipos = new DaoTipos();
-            $result = json_decode($daoTipos->selectTiposCidade($idCidade));
-            $tipos = array();
-            foreach ($result->data as $key => $value) {
-                if($value->icon == null){
-                    $icon = "";
-                }
-                else{
-                    $icon = $value->icon;
-                }
-                $tipo = array(
-                    "idTipo" => $value->id,
-                    "nome" => $value->nome,
-                    "icon" => $icon
-                );
-                array_push($tipos,$tipo);                
-            }
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode($tipos, JSON_PRETTY_PRINT);
-        }
-        
-        
-        public function getProdutores(){
-            $daoProdutor = new DaoProdutores();
-            $produtores = $daoProdutor->getProdutores();
-            
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo $produtores;
-        }   
-        
-        
-        public function selectProdutor($idProdutor){
-            $daoProdutor = new DaoProdutores();
-            $produtor = $daoProdutor->selectProdutor($idProdutor);
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo $produtor;
-        }   
-        
-        public function notificacoes(){
-            
-            $notify = array(
-                array("title"=>"Teste","body"=>"Testando notificações"),
+                "img" => $value->img
             );
-            
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode($notify);
-        }   
-            
+            array_push($citys, $cidade);
         }
-        
-        
-        ?>
+        // required headers
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($citys, JSON_PRETTY_PRINT);
+    }
+
+    public function selectNegocios($cidade)
+    {
+
+        $daoNegocios = new DaoNegocio();
+        $produtores = json_decode($daoNegocios->selectProdutores($cidade));
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($produtores, JSON_PRETTY_PRINT);
+    }
+
+    public function getTipos()
+    {
+        $daoTipos = new DaoTipos();
+        $result = json_decode($daoTipos->getTipos());
+        $tipos = array();
+        foreach ($result->data as $key => $value) {
+            if ($value->icon == null) {
+                $icon = "";
+            } else {
+                $icon = $value->icon;
+            }
+            $tipo = array(
+                "idTipo" => $value->idTipo,
+                "nome" => $value->nome,
+                "icon" => $icon
+            );
+            array_push($tipos, $tipo);
+        }
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($tipos, JSON_PRETTY_PRINT);
+    }
+    public function getTiposCidade($idCidade)
+    {
+        $daoTipos = new DaoTipos();
+        $result = json_decode($daoTipos->selectTiposCidade($idCidade));
+        $tipos = array();
+        foreach ($result->data as $key => $value) {
+            if ($value->icon == null) {
+                $icon = "";
+            } else {
+                $icon = $value->icon;
+            }
+            $tipo = array(
+                "idTipo" => $value->id,
+                "nome" => $value->nome,
+                "icon" => $icon
+            );
+            array_push($tipos, $tipo);
+        }
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($tipos, JSON_PRETTY_PRINT);
+    }
+
+
+    public function getProdutores()
+    {
+        $daoProdutor = new DaoProdutores();
+        $produtores = $daoProdutor->getProdutores();
+
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo $produtores;
+    }
+
+
+    public function selectProdutor($idProdutor)
+    {
+        $daoProdutor = new DaoProdutores();
+        $produtor = $daoProdutor->selectProdutor($idProdutor);
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo $produtor;
+    }
+
+    public function notificacoes()
+    {
+
+        $notify = array(
+            array(
+                "title" => "Teste", "body" => "Testando notificações",
+                "link" => array(
+                    array("href" => "emcomp.com.br", "body" => "emcomp")
+                )
+            ),
+        );
+
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($notify);
+    }
+}

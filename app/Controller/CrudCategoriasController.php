@@ -1,113 +1,137 @@
 <?php
+
 namespace App\Controller;
-use App\Dao\DaoTipos;
+
+use App\Dao\DaoCategorias;
 use App\Model\ModelCategorias;
+use Classes\StrValidator;
 use Classes\UploadImagens;
 
-class CrudCategoriasController {
-    
-    function __construct(){
-        session_start();
-        if(!isset($_SESSION['idAdmin'])){
-            header("Content-Type: application/json; charset=UTF-8");
-            echo json_encode(array("success"=>false,"msg"=>"Você não tem permissão para isso."));
-            header('location:'.DIRPAGE.'error');
-        }
-    }
-    
-    public function cadastrar()
+class CrudCategoriasController
+{
+
+    private $categoria;
+    private $daoCategorias;
+    private $strValidator;
+    private $uploadImagens;
+
+    function __construct()
     {
-        if((isset($_POST['nome']))&&(isset($_POST['keywords']))&&(isset($_POST['icon']))){
-            $categoria = new ModelCategorias();
-            $categoria->setNome($_POST['nome']);
-            $categoria->setDescricao($_POST['keywords']);
-            $categoria->setIcon($_POST['icon']);
-            
-            $DaoTipos = new DaoTipos();
-            $result = json_decode($DaoTipos->cadastrar($categoria));
-            if($result->success){
-                if(isset($_FILES['img'])){
-                    $upload = new UploadImagens();
-                    $upload->categoria($result->data->idTipo,$_FILES['img']);
-                    $data = array("success"=>true,"msg"=>"Cadastro com sucesso");
-                }
-                else{
-                    $data = array("success"=>true,"msg"=>"Cadastro com sucesso, sem imagem.");
-                }
-            }
-            else{
-                $data = array("success"=>false,"msg"=>"Erro ao cadastrar");
-            }
+        $this->categoria = new ModelCategorias;
+        $this->daoCategorias = new DaoCategorias;
+        $this->strValidator = new StrValidator;
+        $this->uploadImagens = new UploadImagens;
+    }
+
+    private function ValidarEncapsular($data)
+    {
+        $success = true;
+
+        if ($this->strValidator->setValor($data['nome'])->max(200)->required()->isValid()) {
+            $this->categoria->setNome($data['nome']);
+        } else {
+            $success = false;
         }
-        else{
-            $data = array("success"=>false,"msg"=>"Erro ao cadastrar, faltaram dados.");
+        if ($this->strValidator->setValor($data['descricao'])->max(200)->required()->isValid()) {
+            $this->categoria->setDescricao($data['descricao']);
+        } else {
+            $success = false;
+        }
+
+        if ($this->strValidator->setValor($data['icon'])->max(50)->required()->isValid()) {
+            $this->categoria->setIcon($data['icon']);
+        } else {
+            $success = false;
+        }
+        return $success;
+    }
+
+    public function cadastrar($categoria, $img)
+    {
+
+        if ($this->ValidarEncapsular($categoria)) {
+
+            $result = $this->daoCategorias->cadastrar($this->categoria);
+            if ($result['success']) {
+                if (!empty($img)) {
+
+                    if ($this->uploadImagem($result['data']['idCategoria'], $img)) {
+                        $data = array("success" => true, "msg" => "Cadastro com sucesso");
+                    } else {
+                        $data = array("success" => true, "msg" => "Cadastro com sucesso, erro ao salvar imagem.");
+                    }
+                } else {
+                    $data = array("success" => true, "msg" => "Cadastro com sucesso, sem imagem.");
+                }
+            } else {
+                $data = array("success" => false, "msg" => "Erro ao cadastrar");
+            }
+        } else {
+            $data = array("success" => false, "msg" => "Erro ao cadastrar, faltaram dados.");
         }
         header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($data);
     }
-    
-    
-    public function editar($idTipo)
+
+
+    public function editar($idCategoria, $categoria, $img)
     {
-        if((isset($_POST['nome']))&&(isset($_POST['keywords']))&&(isset($_POST['icon']))){
-            $categoria = new ModelCategorias();
-            $categoria->setNome($_POST['nome']);
-            $categoria->setDescricao($_POST['keywords']);
-            $categoria->setIcon($_POST['icon']);
-            
-            $DaoTipos = new DaoTipos();
-            $result = json_decode($DaoTipos->editar($categoria));
-            if($result->success){
-                if(isset($_FILES['img'])){
-                    $upload = new UploadImagens();
-                    $upload->categoria($idTipo,$_FILES['img']);
-                    $data = array("success"=>true,"msg"=>"Editado com sucesso");
+
+        if ($this->ValidarEncapsular($categoria)) {
+            $this->categoria->setId($idCategoria);
+
+            $result = $this->daoCategorias->editar($this->categoria);
+            if ($result['success']) {
+                if (!empty($img)) {
+                    if ($this->UploadImagem($idCategoria, $img)) {
+                        $data = array("success" => true, "msg" => "Editado com sucesso");
+                    } else {
+                        $data = array("success" => true, "msg" => "Editado com sucesso, erro ao modificar imagem.");
+                    }
+                } else {
+                    $data = array("success" => true, "msg" => "Editado com sucesso, imagem não modificada.");
                 }
-                else{
-                    $data = array("success"=>true,"msg"=>"Editado com sucesso, imagem não modificada.");
-                }
+            } else {
+                $data = array("success" => false, "msg" => $result->data);
             }
-            else{
-                $data = array("success"=>false,"msg"=>$result->data);
-            }
+        } else {
+            $data = array("success" => false, "msg" => "Erro ao editar, faltaram dados.");
         }
-        else{
-            $data = array("success"=>false,"msg"=>"Erro ao editar, faltaram dados.");
-        }
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($data);
+       
+      return $data;
     }
-    
-    
+
+
     public function apagar($idCategoria)
     {
-        $DaoTipos = new DaoTipos();
-        $nome = json_decode($DaoTipos->getTipo($idCategoria));
-        
-        if($DaoTipos->apagar($idCategoria)){
-            $upload = new UploadImagens();
-            if($upload->apagar("produtores/",$nome->data->img)){
-                $data = array("success"=>true,"msg"=>"Tudo apagado");
+      
+        $nome = $this->daoCategorias->selectCategoria($idCategoria);
+
+        if ($this->daoCategorias->apagar($idCategoria)) {
+            if ($this->uploadImagens->apagar("negocios/", $nome['data']['img'])) {
+                $data = array("success" => true, "msg" => "Tudo apagado");
+            } else {
+                $data = array("success" => true, "msg" => "Erro ao apagar imagem");
             }
-            else{
-                $data = array("success"=>true,"msg"=>"Erro ao apagar imagem");
-            }
+        } else {
+            $data = array("success" => false, "msg" => "Nada apagado.");
         }
-        else{
-            $data = array("success"=>false,"msg"=>"Nada apagado.");
-        }
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($data);
+       
+        return $data;
     }
-    
-    
-    public function getCategoria($idTipo)
+
+    private function UploadImagem($idCategoria, $img)
     {
-        $DaoTipos = new DaoTipos();
-        $tipo = $DaoTipos->getTipo($idTipo);
-        header("Content-Type: application/json; charset=UTF-8");
-        echo $tipo;
+        try {
+            $this->uploadImagens->categoria($idCategoria, $img);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function getCategoria($idCategoria)
+    {
+        $categoria = $this->daoCategorias->selectCategoria($idCategoria);
+        return$categoria;
     }
 }
-
-

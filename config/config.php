@@ -13,8 +13,8 @@ else{
 }
 
 #chaves recaptcha 
-define('PrivKey','');
-define('PubKey','');
+define('PrivKey','6Le4s7QUAAAAAPbWsbGZVDieLzMi-fFdew7RYn0K');
+define('PubKey','6Le4s7QUAAAAAMJDrdkRXh9_BGrixbIIzcyfv-b8');
 
 
 #diretorios especificos

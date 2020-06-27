@@ -18,10 +18,12 @@ class Routes extends UrlTrait
 	public function getRoute()
 	{
 		$this->routes = array("" => "HomeController",
-		"home"=>"HomeController", 
+		"home"=>"HomeController",
 		"cidade"=>"CityController",
 		"produtores" => "ProdutoresController",
+		"loginadm" => "LoginAdmController",
 		"login" => "LoginController",
+		"perfil"=>"PerfilController",	
 		"administracao" => "AdministracaoController",
 		"session" => "SessionController",
 		"crudprodutores" => "CrudProdutoresController",
@@ -30,7 +32,8 @@ class Routes extends UrlTrait
 		"filtro" => "FiltroController",
 		"contato" =>"ContatoController",
 		"api" => "ApiController",
-		"politicas" => "PoliticasController"
+		"legal" => "LegalController",
+		"sobre" => "SobreController"
 	);
 	$this->url = new UrlTrait();
 	$index = $this->url->traitUrl();
