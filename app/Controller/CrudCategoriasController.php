@@ -69,8 +69,7 @@ class CrudCategoriasController
         } else {
             $data = array("success" => false, "msg" => "Erro ao cadastrar, faltaram dados.");
         }
-        header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($data);
+        return $data;
     }
 
 
@@ -92,7 +91,7 @@ class CrudCategoriasController
                     $data = array("success" => true, "msg" => "Editado com sucesso, imagem não modificada.");
                 }
             } else {
-                $data = array("success" => false, "msg" => $result->data);
+                $data = array("success" => false, "msg" => $result['data']);
             }
         } else {
             $data = array("success" => false, "msg" => "Erro ao editar, faltaram dados.");
