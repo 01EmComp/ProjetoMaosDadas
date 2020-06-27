@@ -2,16 +2,23 @@
 
 namespace App\Controller;
 
-use App\Model\ModelNegocio;
-use App\Dao\DaoProdutores;
-use App\Dao\DaoCidades;
-use App\Dao\DaoTipos;
+
 use Classes\StrValidator;
 use Classes\UploadImagens;
 
 class ApiController
 {
 
+
+    private $crudNegocios;
+    private $crudCidades;
+    private $crudCategorias;
+    function __construct()
+    {
+        $this->crudCidades = new DaoCidades;
+        $this->crudNegocios = new DaoNegocios;
+        $this->daoCategorias = new DaoCategorias
+    }
 
     private function veririficSessão($sessionId)
     {
@@ -69,11 +76,11 @@ class ApiController
         echo json_encode($citys, JSON_PRETTY_PRINT);
     }
 
-    public function selectProdutores($cidade)
+    public function selectNegocios($cidade)
     {
 
-        $daoProdutores = new DaoProdutores();
-        $produtores = json_decode($daoProdutores->selectProdutores($cidade));
+        $daoNegocios = new DaoNegocio();
+        $produtores = json_decode($daoNegocios->selectProdutores($cidade));
 
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");

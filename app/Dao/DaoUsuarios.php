@@ -14,7 +14,7 @@ class DaoUsuarios {
     public function verificaLogin($login,$senha){
         try {
 
-            $query = self::findQuery($login);
+            $query = $this->findQuery($login);
            
             $stmt = $this->con->prepare($query);
             
@@ -37,7 +37,7 @@ class DaoUsuarios {
                     $data['data'] = "Usuario não encontrado";
                 }
                 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 
                 $data['success'] = false;
                 $data['data'] = 'Error: '.$e->getMessage();

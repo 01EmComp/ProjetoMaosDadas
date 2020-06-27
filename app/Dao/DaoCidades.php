@@ -40,14 +40,13 @@ class DaoCidades
 				$data['success'] = true;
 				$data['data'] = $cidades;
 				
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				
 				$data['success'] = false;
 				$data['data'] = 'Error: '.$e->getMessage();
 			}	
 			
-			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
+			return $data;
 		}
 		
 		
@@ -71,16 +70,15 @@ class DaoCidades
 				$data['success'] = true;
 				$data['data'] = $name;
 				
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				
 				$data['success'] = false;
 				$data['data'] = 'Error: '.$e->getMessage();
 			}
-			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
+			return $data;
 		}
 		
-		public function cadastraCidade(ModelCidades $cidade)
+		public function cadastrar(ModelCidades $cidade)
 		{
 			try {
 				$query = "INSERT INTO `Cidades`(`nome`, `cep`, `uf`,`img`,`ordemExibicao`) 
@@ -106,18 +104,17 @@ class DaoCidades
 					$data['success'] = false;
 					$data['data'] = $stmt->errorInfo();
 				}
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				
 				$data['success'] = false;
 				$data['data'] = 'Error: '.$e->getMessage();
 			}	
 			
-			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
+			return $data;
 		}
 
 
-		public function editarCidade(ModelCidades $cidade)
+		public function editar(ModelCidades $cidade)
 		{
 			try {
 				$query = "UPDATE `Cidades` SET `nome`=:nome,`cep`=:cep,
@@ -137,14 +134,13 @@ class DaoCidades
 					$data['success'] = false;
 					$data['msg'] = $stmt->errorInfo();
 				}
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				
 				$data['success'] = false;
 				$data['msg'] = 'Error: '.$e->getMessage();
 			}	
 			
-			//header("Content-Type: application/json; charset=UTF-8");
-			return json_encode($data);
+			return $data;
 		}
 
 		public function apagar($id)
@@ -163,14 +159,13 @@ class DaoCidades
 				$data['success'] = false;
 				$data['data'] = $stmt->errorInfo();
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			
 			$data['success'] = false;
 			$data['data'] = 'Error: '.$e->getMessage();
 		}	
-		
-		//header("Content-Type: application/json; charset=UTF-8");
-		return json_encode($data);
+	
+		return $data;
 	}	
 
 		public function setImgName($id,$imgName){
@@ -185,7 +180,7 @@ class DaoCidades
 				if($stmt->execute()){
 					return true;
 				}
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				return false;
 			}	
 		}

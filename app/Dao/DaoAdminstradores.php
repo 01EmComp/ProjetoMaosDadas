@@ -35,7 +35,7 @@ class DaoAdminstradores {
                     $data['data'] = "Usuario não encontrado";
                 }
                 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 
                 $data['success'] = false;
                 $data['data'] = 'Error: '.$e->getMessage();

@@ -1,8 +1,9 @@
 <?php 
 namespace Classes;
+
+use App\Dao\DaoCategorias;
 use App\Dao\DaoCidades;
-use App\Dao\DaoProdutores;
-use App\Dao\DaoTipos;
+use App\Dao\DaoNegocio;
 
 //classe responsavel por redimensionar imagens
 use WideImage\WideImage;
@@ -11,6 +12,10 @@ use Exception;
 class UploadImagens{
     
     private $extencoes;
+
+    private $DaoNegocio;
+    private $daoCidade;
+    private $DaoCategorias;
     
     function __construct(){
         $this->extencoes = array(
@@ -21,7 +26,7 @@ class UploadImagens{
         
         public function cidade($id, $img){            
             
-            $daoCidade = new DaoCidades();
+            $this->daoCidade = new DaoCidades();
             
             if(array_key_exists($img['type'], $this->extencoes)){
                 
@@ -32,8 +37,8 @@ class UploadImagens{
                     unlink($destino);
                 }
 
-                if($daoCidade->setImgName($id, $novoNome)){
-                    if(self::upload($img['tmp_name'],$destino)){
+                if($this->daoCidade->setImgName($id, $novoNome)){
+                    if($this->upload($img['tmp_name'],$destino)){
                         return true;
                     }else{
                         throw new \Exception("Erro ao enviar imagem");
@@ -54,7 +59,7 @@ class UploadImagens{
 
         public function categoria($id, $img){            
             
-            $DaoCategorias = new DaoTipos();
+            $this->DaoCategorias = new DaoCategorias();
             
             if(array_key_exists($img['type'], $this->extencoes)){
                 
@@ -64,8 +69,8 @@ class UploadImagens{
                 if(file_exists($destino)){
                     unlink($destino);
                 }
-                if($DaoCategorias->setImgName($id, $novoNome)){
-                    if(self::upload($img['tmp_name'],$destino)){
+                if($this->DaoCategorias->setImgName($id, $novoNome)){
+                    if($this->upload($img['tmp_name'],$destino)){
                         return true;
                     }else{
                         throw new \Exception("Erro ao enviar imagem");
@@ -82,9 +87,9 @@ class UploadImagens{
         
         
         
-        public function produtor($id, $img){            
+        public function negocio($id, $img){            
             
-            $daoProdutores = new DaoProdutores();
+            $this->DaoNegocio = new DaoNegocio();
             
             if(array_key_exists($img['type'], $this->extencoes)){
                 
@@ -94,8 +99,8 @@ class UploadImagens{
                 if(file_exists($destino)){
                     unlink($destino);
                 }
-                if($daoProdutores->setImgName($id, $novoNome)){
-                    if(self::upload($img['tmp_name'],$destino)){
+                if($this->DaoNegocios->setImgName($id, $novoNome)){
+                    if($this->upload($img['tmp_name'],$destino)){
                         return true;
                     }else{
                         throw new \Exception("Erro ao enviar imagem");
