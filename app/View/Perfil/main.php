@@ -21,13 +21,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= DIRPAGE ?>contato">
-                                    <h5><i class="fas fa-envelope navbarIcons"></i> Contato</h5>
+                                    <h5><i class="fa fa-envelope navbarIcons"></i> Contato</h5>
                                 </a>
                             </li>
                         </ul>
-                        <button disabled class="btn btn-light my-2 my-sm-0 btn-lg " type="submit">
-                            <i class="fas fa-user">
-                            </i> Área do Fornecedor
+                        <button class="btn btn-outline-danger my-2 my-sm-0 btn-lg" id="btnUserLogout" >
+                            <i class="fas fa-sign-out-alt"></i> Sair
                         </button>
                     </div>
                 </nav>

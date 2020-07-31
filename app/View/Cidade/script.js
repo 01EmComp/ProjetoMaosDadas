@@ -1,17 +1,16 @@
 var domain = document.domain;
 var path = window.location.pathname;
-
 //Cria dinamicamente onde se deve fazer as requisiçoes dinamicas
 var urlRequisicao = window.location.origin + '/';
-
+if (sessionStorage.getItem('cidadeSelecionada') == null) {
+    window.location.assign(urlRequisicao);
+}
 $(document).ready(function () {
-
-    var idCidade = $("#city").val();
+    var idCidade = sessionStorage.getItem('cidadeSelecionada');
     var idCategoria = 0;
-
     $.ajax({
         method: "GET",
-        url: "http://projetomaosdadas.emcomp.com.br/api/getTipos/",
+        url: urlRequisicao+"api/selectCategorias/",
         dataType: "json",
         beforeSend: function () {
             $("#loader").show();
@@ -26,16 +25,16 @@ $(document).ready(function () {
             }
             else {
                 $("#topo").append(
-                '<div id="listToggle" class="center">'
-                +'<button type="button" class="btn btn-block center" data-toggle="modal" data-target="#modalMenu">'
-                + '<span class="fa fa-bars " id="btnMenuIcon"></span>'
-                +'</button>'
-                + '</div>');
+                    '<div id="listToggle" class="center">'
+                    + '<button type="button" class="btn btn-block center" data-toggle="modal" data-target="#modalMenu">'
+                    + '<span class="fa fa-bars " id="btnMenuIcon"></span>'
+                    + '</button>'
+                    + '</div>');
                 $("#menuModal").html('<div class="modal fade" id="modalMenu" tabindex = "-1" role = "dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" > '
                     + '<div class="modal-dialog modal-dialog-centered" role="document">'
                     + '<div class="modal-content">'
                     + '<div class="modal-header">'
-                    +'<h5 class="modal-title font-weight-bold text-white">Menu</h5>'
+                    + '<h5 class="modal-title font-weight-bold text-white">Menu</h5>'
                     + '<button type="button" class="close" data-dismiss="modal"  onclick="menuHide()">'
                     + '<span aria-hidden="true">&times;</span>'
                     + '</button>'
@@ -56,43 +55,44 @@ $(document).ready(function () {
             }
             $("#minhaLista").append('<li class="list-group-item list-group-item-action active teste-categoria border-0" idTipo="0">Todos<i class="fas fa-list-ul float-right"></i></li>');
 
-            $.each(result, function (index, value) {
+            $.each(result.data, function (index, value) {
 
                 $("#minhaLista").append(
-                    '<li class="list-group-item list-group-item-action teste-categoria border-0" idTipo="' + value.idTipo + '">'
-                    + '<span id="cat-' + value.idTipo + '">' + value.nome + '</span>'
+                    '<li class="list-group-item list-group-item-action teste-categoria border-0" idTipo="' + value.idCategoria + '">'
+                    + '<span id="cat-' + value.idCategoria + '">' + value.nome + '</span>'
                     + '<i class="fas fa-' + value.icon + ' float-right "></i>'
                     + '</li>'
                 );
             });
         },
         error: function (xhr, status, errorMessage) {
-            console.log("DEU RUIM");
+            console.log("DEU RUIMaa");
         },
         complete: function (data) {
             $("#loader").hide();
         }
     });
 
-    function listarProdutores(idCidade, idTipo) {
+    function listarProdutores(idTipo) {
+        var idCidade = sessionStorage.getItem('cidadeSelecionada');
         if (idTipo == 0) {
             $.ajax({
                 type: "GET",
-                url: "http://projetomaosdadas.emcomp.com.br/api/selectprodutores/" + idCidade,
+                url: urlRequisicao+"api/selectNegociosCidade/" + idCidade,
                 dataType: "json",
                 beforeSend: function () {
                     $("#load").removeClass('d-none');
                     $("#loader").show();
                 },
                 success: async function (result, status, xhr) {
-                    // console.log(result[0].nomeCidade);
+                     console.log(result);
                     await renderCardsProdutores(result.data);
 
                     $("#myFooter").removeClass('d-none');
 
                 },
                 error: function (result, status, xhr) {
-                    //console.log(result);
+                    console.log(result);
                 },
                 complete: function (data) {
                     $("#loader").hide();
@@ -102,7 +102,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "GET",
-                url: "http://projetomaosdadas.emcomp.com.br/filtro/produtores/" + idCidade + "/" + idTipo,
+                url: urlRequisicao+"filtro/produtores/" + idCidade + "/" + idTipo,
                 dataType: "json",
                 beforeSend: function () {
                     $("#load").removeClass('d-none');
@@ -134,7 +134,7 @@ $(document).ready(function () {
         }
     }
 
-    listarProdutores(idCidade, idCategoria);
+    listarProdutores(idCategoria);
 
 
 
@@ -147,7 +147,7 @@ $(document).ready(function () {
         $("#load").removeClass('d-none');
         $("#loader").show();
         $("#categoria").html($("#cat-" + idTipo).html());
-        listarProdutores(idCidade, idTipo);
+        listarProdutores(idTipo);
         menuHide();
 
     });
@@ -201,7 +201,6 @@ $(document).ready(function () {
                 ///console.log(result);
             },
             error: function (xhr, status, errorMessage) {
-                console.log("DEU RUIM");
             },
             complete: function (data) {
                 $("#loader").hide();
@@ -236,7 +235,8 @@ $(document).ready(function () {
         $("#cards").empty();
         var idTipo = 0;
         var idCidade = $(this).attr("id");
-        listarProdutores(idCidade, idTipo);
+        $("#city").val(idCidade);
+        listarProdutores(idTipo);
         menuHide();
     });
 
@@ -263,6 +263,13 @@ function start() {
     return md;
 }
 
+$(window).resize(function(){
+    $('.cardsNegocios').removeClass("col-md-4");
+    $('.cardsNegocios').removeClass("col-md-6");
+    var md = start();
+    $('.cardsNegocios').addClass("col-md-"+md);
+});
+
 function menuShow() {
     $("#modalMenu").modal("show");
     $("#minhaLista").addClass('show');
@@ -278,12 +285,12 @@ function renderCardsProdutores(result) {
         $("#load").addClass('d-none');
         $("#home").html('<a href="' + urlRequisicao + '">Home</a>');
         $("#nomeCidade").html(value.nomeCidade);
-        var nomeProdutor = verificaTamanhoNomes(value.nomeProdutor, 26, 22, '...');
+        var nomeNegocio = verificaTamanhoNomes(value.nomeNegocio, 26, 22, '...');
         $("#cards").append(
-            '<div class="col-md-' + md + '" >'
+            '<div class="cardsNegocios col-md-' + md + '" >'
             + '<div class="card card-tamanho animated fadeIn slow border-0 bg-white mt-2 mb-2 mr-2" style="box-shadow:0 0 4px #000" >'
             + '<div class="img-hover-btightness"> '
-            + '<img data="' + value.idProdutor + '" class="card-img-top card-img-tamanho produtores" src="' + urlRequisicao + 'public/img/produtores/supermercado.png" alt="Card image cap" id="imagens' + index + '">'
+            + '<img data="' + value.idNegocio + '" class="card-img-top card-img-tamanho produtores" src="' + urlRequisicao + 'public/img/produtores/supermercado.png" alt="Card image cap" id="imagens' + index + '">'
             + '</div>'
             + '<div class="card-body d-none d-flex flex-column" id="cardb' + index + '"> '
             + '<div class="row"> '
@@ -298,7 +305,7 @@ function renderCardsProdutores(result) {
             + '</div>'
             + '</div>'
             + '<h5 class="card-title text-truncate" id="nome" style="max-width:29rem;max-height:24px;">'
-            + nomeProdutor
+            + nomeNegocio
             + '</h5>'
             + '<div class="row">'
             + '<div class="col-7" style="margin:0; padding:2px;">'
@@ -331,7 +338,7 @@ function renderCardsProdutores(result) {
 
 
 
-        $("#categoria" + index).append('<i class="fas fa-' + value.icon + '"></i> ' + value.nomeTipo);
+        $("#categoria" + index).append('<i class="fas fa-' + value.iconeCategoria + '"></i> ' + value.nomeCategoria);
 
 
     });

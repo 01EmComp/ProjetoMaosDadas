@@ -128,9 +128,14 @@ class CrudCategoriasController
         }
     }
 
-    public function getCategoria($idCategoria)
+    public function selectCategorias()
+    {
+        $categorias = $this->daoCategorias->selectCategorias();
+        return $categorias;
+    }
+    public function selectCategoria($idCategoria)
     {
         $categoria = $this->daoCategorias->selectCategoria($idCategoria);
-        return$categoria;
+        return $categoria;
     }
 }

@@ -163,7 +163,7 @@ h1.nomecidade{
 .btn-posicao{
   position: fixed;
   right: 0;
-  top: 95%;
+  top: 98%;
   margin-top: -2.5em;
 }
 .tamanho{
@@ -181,6 +181,7 @@ html{
     background-color: #28a745;
     color: white;
     padding-top: 30px;
+
 }
 
 #myFooter .footer-copyright {

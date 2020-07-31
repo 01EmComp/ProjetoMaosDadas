@@ -9,7 +9,6 @@ class PerfilController extends Render
 
     function __construct()
     {
-        $this->valor = "12345";
         session_start();
         if (isset($_SESSION['userId'])) {
             $this->setTitle("Perfil");
@@ -18,7 +17,7 @@ class PerfilController extends Render
             $this->setDir("Perfil/");
             $this->renderLayout();
         } else {
-              header('location:'.DIRPAGE.'error/401');
+              header('location:'.DIRPAGE.'login');
         }
     }
 

@@ -56,6 +56,4 @@
     <button style="z-index:1060;" onClick="scrolToTop(body)" class="btn btn-posicao btn-dark float-right mr-3">
         <i class="fas fa-chevron-circle-up"></i>
     </button>
-
-    <input type="hidden" name="idCidade" value="<?= $this->getIdCidade() ?>" id="city" />
 </div>

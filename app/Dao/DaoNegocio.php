@@ -90,11 +90,11 @@ class DaoNegocio
 	{
 
 		try {
-			$query = "SELECT  DISTINCT idNegocio,`nomeNegocio`,
+			$query = "SELECT  DISTINCT idNegocio,`nomeNegocio`,`idUsuario`,
 			`whatsapp`, `endereco`, `descricao`, `formaPagamento`, `formaEntrega`,
 			`keyWords`, `nomeCidade`, `idCategoria`, `idCidade`,`img`,`nomeCategoria`,`icon` FROM 
 			`VisaoGeralTiposProdutores`
-		   WHERE idCidade = :cidade ORDER BY nomeNegocio ASC";
+		   WHERE idCidade = :cidade ORDER BY RAND()";
 			$stmt = $this->con->prepare($query);
 			$stmt->bindValue(':cidade', $cidade);
 			$stmt->execute();
@@ -107,8 +107,7 @@ class DaoNegocio
 			$data['success'] = false;
 			$data['data'] = 'Error: ' . $e->getMessage();
 		}
-		//header("Content-Type: application/json; charset=UTF-8");
-		return json_encode($data);
+		return $data;
 	}
 
 

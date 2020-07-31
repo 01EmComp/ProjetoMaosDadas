@@ -1,40 +1,162 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-body{
-	position: relative;
-	background-color: #ededed;
-	min-height: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-@keyframes animatebottom { 
-	from{ bottom:-100px; opacity:0 } 
-	to{ bottom:0; opacity:1 }
+body {
+    position: relative;
+    background-color: #ededed;
+    min-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-
-
-.footer{
-	
-	bottom: 0; 
-	left: 0;
-	position: static; 
-	width: 100%; 
-	
+@keyframes animatebottom {
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+    to {
+        bottom: 0;
+        opacity: 1
+    }
 }
-.footer .text{
-	margin: auto;
-	align-items: center;
-	color: #fff;
-	text-align: center;
-	height: 32px;
+
+.footer {
+    bottom: 0;
+    left: 0;
+    position: static;
+    width: 100%;
+}
+
+.footer .text {
+    margin: auto;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    height: 32px;
 }
 
 .navbar {
-z-index: 1030;
-width: 100%;
+    z-index: 1030;
+    width: 100%;
+}
+
+.pesquisa-container {
+    display: inline-flex;
+    position: fixed;
+    right: 16px;
+    top: 80% !important;
+}
+
+.pesquisa-container .pesquisa-image {
+    width: 58px;
+    height: 58px;
+    background-color: #28a745;
+    box-shadow: 0 0 6px #000;
+    cursor: pointer;
+}
+
+.pesquisa-container .pesquisa-image .badge {
+    top: 0%;
+    left: -10%;
+}
+.arrow-notify{
+    right: 6px;
+    top:68%;
+}
+.arrow-notify svg{
+    width: 80px !important;
+    height: 80px !important;
+    color:#ff3737;
+}
+
+.pesquisa-container .pesquisa-image img {
+    margin-top: 2px;
+}
+
+.pesquisa-container .card {
+    border: #dedede 1px solid;
+}
+
+.card-form-pesquisa {
+    padding: 0 !important;
+    width: 280px;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+}
+
+.custom-control {
+    cursor: pointer !important;
+    transition-duration: 300ms;
+}
+
+.custom-control-label {
+    cursor: pointer !important;
+    transition-duration: 300ms;
+}
+
+.custom-control :hover {
+    filter: brightness(80%);
+}
+
+.custom-control label :hover {
+    filter: brightness(60%) !important;
+}
+
+.card-header {
+    color: #fff;
+    font-weight: bold !important;
+    border-radius: 3px 3px 0px 0px;
+    padding: 0.75rem 0.25rem;
+}
+
+.msg {
+    margin: 6px 0px -2px 2px;
+    min-width: 200px;
+    width: 220px !important;
+    display: flex;
+}
+
+.msg.options {
+    padding: 8px;
+    border-radius: 2px;
+    width: 220px;
+    margin-right: 0!important;
+}
+
+.msg p {
+    padding: 2px 2px 6px 2px;
+    border-radius: 8px;
+    border: 1px solid #6d6d6d;
+    background-color: #fff;
+    color: #000;
+    font-weight: 400;
+    position: relative;
+}
+
+.msg p button {
+    padding: 4px;
+    margin: 4px 2px 2px 0px;
+}
+
+.msg span {
+    position: relative;
+    margin: 2px 4px 0px -1px;
+    left: 0;
+}
+
+.msg span svg {
+    position: relative;
+    top: 30%;
+}
+
+.outputOption {
+    width: 200px;
+    height: 26px;
+    text-align: center;
+    font: 400 20px;
+    margin-right: 10px;
 }

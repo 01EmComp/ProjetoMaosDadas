@@ -2,22 +2,19 @@
 
 namespace App\Controller;
 
-
-use Classes\StrValidator;
-use Classes\UploadImagens;
-
 class ApiController
 {
-
 
     private $crudNegocios;
     private $crudCidades;
     private $crudCategorias;
-    function __construct()
+    private $pesquisa;
+    public function __construct()
     {
-        $this->crudCidades = new DaoCidades;
-        $this->crudNegocios = new DaoNegocios;
-        $this->daoCategorias = new DaoCategorias
+        $this->crudCidades = new CrudCidadesController;
+        $this->crudNegocios = new CrudNegociosController;
+        $this->crudCategorias = new CrudCategoriasController;
+        $this->pesquisa = new PesquisaController;
     }
 
     private function veririficSessão($sessionId)
@@ -26,8 +23,8 @@ class ApiController
         return session_id() == $sessionId ? true : false;
     }
 
-
-    public function cadastroNegocio($token){
+    public function cadastroNegocio($token)
+    {
         if ($this->veririficSessão($token)) {
             if (isset($_POST)) {
                 $post = $_POST;
@@ -41,7 +38,7 @@ class ApiController
             $result = array("success" => false, "msg" => "Usuário não autenticado");
         }
         header("Access-Control-Allow-Origin: *");
-     //   header("Content-Type: application/json; charset=UTF-8");
+        //header("Content-Type: application/json; charset=UTF-8");
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
@@ -57,23 +54,13 @@ class ApiController
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function getCidades()
+    public function selectCidades()
     {
-        $cidades = new DaoCidades();
-        $cidades = json_decode($cidades->selectCidades());
-        $citys = array();
-        foreach ($cidades->data as $key => $value) {
-            $cidade = array(
-                "idCidade" => $value->idCidade,
-                "nome" => $value->nome,
-                "img" => $value->img
-            );
-            array_push($citys, $cidade);
-        }
-        // required headers
+
+        $cidades = $this->crudCidades->selectCidades();
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($citys, JSON_PRETTY_PRINT);
+        echo json_encode($cidades, JSON_PRETTY_PRINT);
     }
 
     public function selectNegocios($cidade)
@@ -87,28 +74,13 @@ class ApiController
         echo json_encode($produtores, JSON_PRETTY_PRINT);
     }
 
-    public function getTipos()
+    public function selectCategorias()
     {
-        $daoTipos = new DaoTipos();
-        $result = json_decode($daoTipos->getTipos());
-        $tipos = array();
-        foreach ($result->data as $key => $value) {
-            if ($value->icon == null) {
-                $icon = "";
-            } else {
-                $icon = $value->icon;
-            }
-            $tipo = array(
-                "idTipo" => $value->idTipo,
-                "nome" => $value->nome,
-                "icon" => $icon
-            );
-            array_push($tipos, $tipo);
-        }
+        $categorias = $this->crudCategorias->selectCategorias();
 
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($tipos, JSON_PRETTY_PRINT);
+        echo json_encode($categorias, JSON_PRETTY_PRINT);
     }
     public function getTiposCidade($idCidade)
     {
@@ -124,7 +96,7 @@ class ApiController
             $tipo = array(
                 "idTipo" => $value->id,
                 "nome" => $value->nome,
-                "icon" => $icon
+                "icon" => $icon,
             );
             array_push($tipos, $tipo);
         }
@@ -134,18 +106,15 @@ class ApiController
         echo json_encode($tipos, JSON_PRETTY_PRINT);
     }
 
-
-    public function getProdutores()
+    public function selectNegociosCidade($idCidade)
     {
-        $daoProdutor = new DaoProdutores();
-        $produtores = $daoProdutor->getProdutores();
-
+        $negocios = $this->crudNegocios->selectNegociosCidade($idCidade);
 
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
-        echo $produtores;
-    }
 
+        echo json_encode($negocios, JSON_PRETTY_PRINT);
+    }
 
     public function selectProdutor($idProdutor)
     {
@@ -160,17 +129,24 @@ class ApiController
     public function notificacoes()
     {
 
-        $notify = array(
-            array(
-                "title" => "Teste", "body" => "Testando notificações",
-                "link" => array(
-                    array("href" => "emcomp.com.br", "body" => "emcomp")
-                )
-            ),
-        );
+        $notify = array();
 
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json; charset=UTF-8");
-        echo json_encode($notify);
+        echo json_encode($notify, JSON_PRETTY_PRINT);
+    }
+    public function lerDadosPesquisa()
+    {
+        $dados = $this->pesquisa->lerDadosPesquisa();
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($dados, JSON_PRETTY_PRINT);
+    }
+    public function adcionarDadosPesquisa()
+    {
+        $result = $this->pesquisa->adcionarDadosPesquisa($_POST);
+        header("Access-Control-Allow-Origin: *");
+        header("Content-Type: application/json; charset=UTF-8");
+        echo json_encode($result, JSON_PRETTY_PRINT);
     }
 }

@@ -175,7 +175,7 @@ class CrudNegociosController
     }
 
 
-    public function selectNegociosCdade($idCidade)
+    public function selectNegociosCidade($idCidade)
     {
 
         $negocios = $this->daoNegocio->selectNegociosCidade($idCidade);

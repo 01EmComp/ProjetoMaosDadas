@@ -66,6 +66,8 @@ class SessionController
     {
         session_start();
         session_destroy();
-        header('location:'.DIRPAGE);
+        header("Content-Type: application/json; charset=UTF-8");
+        
+        echo json_encode(array("success",true));
     }
 }

@@ -1,7 +1,7 @@
 var domain = document.domain;
 var path = window.location.pathname;
 
-//Cria dinamicamente onde se deve fazer as requisiçoes dinamicas
+//Cria dinamicamente onde se deve fazer as requisições dinâmicas
 var urlRequisicao = window.location.origin;
 
 function recaptchaCallback() {
@@ -35,7 +35,7 @@ $(document).ready(function () {
         $("#load").removeClass("d-none");
       },
       success: function (resposta) {
-//        console.log(resposta);
+        //        console.log(resposta);
         if (resposta.success) {
           window.location.assign('/perfil/');
         }

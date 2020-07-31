@@ -85,7 +85,7 @@ async function renderCadastroNegocioLayout() {
                 await $("#formCadastraNegocio").submit(async (e) => {
                     await e.preventDefault();
                     var dados = $("#formCadastraNegocio").serializeArray();
-                    console.log( urlRequisicao + '/api/cadastroNegocio/' + sessionStorage.getItem('phpssid'));
+                    console.log(urlRequisicao + '/api/cadastroNegocio/' + sessionStorage.getItem('phpssid'));
                     $.ajax({
                         url: urlRequisicao + '/api/cadastroNegocio/' + sessionStorage.getItem('phpssid'),
                         type: 'POST',
@@ -114,3 +114,15 @@ async function setInputsValues() {
         }
     });
 }
+
+$("#btnUserLogout").click(function () {
+    $.ajax({
+        url: urlRequisicao + "session/logout",
+        method: "post",
+        success: function (resposta) {
+
+            window.location.assign(urlRequisicao);
+        }
+    }
+    )
+})

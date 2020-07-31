@@ -1,45 +1,58 @@
-html{
+html {
     margin: -1 !important;
-    padding:0 !important;
+    padding: 0 !important;
 }
-@media screen and (min-width:1026px){
-    .barraLateral{
+
+@media screen and (min-width:1026px) {
+    .barraLateral {
         position: fixed;
-        top:0;
+        top: 0;
     }
 }
 
-.icon{
-    color:dimgray; 
+body {
+    background-color: white!important;
 }
-.card{
+
+.icon {
+    color: dimgray;
+}
+
+.card {
     border-radius: 0 !important;
 }
-.cardBody{
-    height: 5rem; 
-    padding:10px;
+
+.cardBody {
+    height: 5rem;
+    padding: 10px;
 }
-.col3{
+
+.col3 {
     padding: 0 2px 0 8px;
 }
-.col3 .icon{
-    width:50px; 
-    height:50px;
+
+.col3 .icon {
+    width: 50px;
+    height: 50px;
 }
-.col9{
+
+.col9 {
     margin: 0;
     padding: 0;
 }
-.col9 .nomeUser{
+
+.col9 .nomeUser {
     color: dimgray;
     font-weight: 600;
-    padding-top:6px;
-    font-size:26px;
+    padding-top: 6px;
+    font-size: 26px;
 }
-.list-group{
+
+.list-group {
     padding: 0 4px;
 }
-.list-group .list-group-item{
+
+.list-group .list-group-item {
     display: flex;
     flex-direction: row;
     padding: 4px;
@@ -48,44 +61,107 @@ html{
     cursor: pointer;
     transition-duration: 300ms;
 }
-.list-group .list-group-item:hover{
+
+.list-group .list-group-item:hover {
     filter: brightness(80%);
 }
-.list-group .list-group-item p{
+
+.list-group .list-group-item p {
     width: 130px;
     font-size: 22px;
     color: dimgray;
     margin: 0;
     margin-left: 1em;
 }
-.list-group .list-group-item .icon{
+
+.list-group .list-group-item .icon {
     color: #28a745;
     width: 30px !important;
     height: 25px !important;
     margin: 0.25em 0 0 0;
-
 }
 
-.responsiveContainer{
-    background-color: #edededed; 
+.responsiveContainer {
+    background-color: #edededed;
     padding: 0;
 }
 
-.loader{
+.loader {
     top: 0;
-    background-color:#2f2f2fcc; 
-    position:absolute !important; 
-    width:100%;
+    background-color: #2f2f2fcc;
+    position: absolute !important;
+    width: 100%;
     height: 100%;
-    z-index:1060;
+    z-index: 1060;
 }
-.navbarIcons{
+
+.navbarIcons {
     width: 24px !important;
     justify-content: center;
 }
-.active .icon{
+
+.active .icon {
     color: white !important;
 }
+
 .active p {
     color: white !important;
+}
+
+/* botão de cadastro */
+
+.cadButton {
+    border-radius: 35px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 10px 30px;
+    font-size: 20px;
+    display: inline-block;
+    transition: all 0.5s;
+    border-style: none;
+    font-family: Futura, Trebuchet MS, Arial, sans-serif;
+}
+
+.cadButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cadButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.cadButton span:after {
+    justify-content: center;
+    font-size: 20px;
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.cadButton:hover span {
+    padding-right: 25px;
+}
+
+.cadButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/* Retirada das bordas dos campos dos formulários*/
+
+.form-control {
+    border: 0;
+    border-bottom: 1px solid grey;
+    border-radius: 0;
+}
+
+.badge {
+    font-size: 15px
 }
